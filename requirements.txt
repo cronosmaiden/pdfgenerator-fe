@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+reportlab
+qrcode
+boto3
+sqlalchemy
+alembic
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
