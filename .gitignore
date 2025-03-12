@@ -13,6 +13,7 @@ __pycache__/
 
 # Ignorar archivos de configuración y variables de entorno
 .env
+temp_qr.png
 .DS_Store
 
 # Ignorar archivos de bases de datos locales

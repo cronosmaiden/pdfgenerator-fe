@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import os
 import boto3
 from datetime import datetime
 from reportlab.lib.pagesizes import letter
@@ -7,7 +9,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph
 from app.services.qr_generator import generar_qr
 from io import BytesIO
-import os
+
+load_dotenv()
 
 # Configuración de S3
 AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
