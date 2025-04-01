@@ -18,15 +18,15 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             except json.JSONDecodeError:
                 body = str(body)  # Si no es JSON, guardarlo como string
 
-        logger.info(f"📩 PETICIÓN: {request.method} {request.url} | Body: {body if body else 'No Body'}")
+        logger.info(f"PETICIÓN: {request.method} {request.url} | Body: {body if body else 'No Body'}")
 
         try:
             response = await call_next(request)
             process_time = time.time() - start_time
 
             logger.info(
-                f"✅ RESPUESTA: {response.status_code} {request.method} {request.url} "
-                f"(⏳ {process_time:.2f}s)"
+                f"RESPUESTA: {response.status_code} {request.method} {request.url} "
+                f"( {process_time:.2f}s)"
             )
 
             return response
@@ -34,7 +34,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             process_time = time.time() - start_time
             logger.error(
-                f"❌ ERROR: {request.method} {request.url} - {str(e)} "
-                f"(⏳ {process_time:.2f}s)", exc_info=True
+                f"ERROR: {request.method} {request.url} - {str(e)} "
+                f"( {process_time:.2f}s)", exc_info=True
             )
             raise e
