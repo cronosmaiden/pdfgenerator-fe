@@ -1,3 +1,4 @@
+from datetime import datetime
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -12,15 +13,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
-AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_REGION = os.getenv("S3_REGION")
 
 s3_client = boto3.client(
     "s3",
-    aws_access_key_id=AWS_ACCESS_KEY,
-    aws_secret_access_key=AWS_SECRET_KEY,
     region_name=S3_REGION
 )
 
@@ -36,8 +33,8 @@ def agregar_direccion_contacto(canvas, doc, factura):
     canvas.setFont("Helvetica", 7)
     page_width = letter[0]
     
-    # 📌 Ajustar la posición más arriba
-    canvas.drawCentredString(page_width / 2, 95, direccion_texto)
+    # 🔽 Ajuste: más abajo
+    canvas.drawCentredString(page_width / 2, 65, direccion_texto)
     
     canvas.restoreState()
 
@@ -49,9 +46,9 @@ def agregar_autorretenedores(canvas, doc, factura):
     )
     canvas.setFont("Helvetica", 7)
     page_width = letter[0]
-    
-    # 📌 Ubicar el texto más abajo que la dirección de contacto
-    canvas.drawCentredString(page_width / 2, 80, notas_texto)
+
+    # 🔽 Ajuste: justo encima del pie de página
+    canvas.drawCentredString(page_width / 2, 50, notas_texto)
     
     canvas.restoreState()
 
@@ -229,6 +226,16 @@ def generar_pdf(factura):
 
     # **Tabla de Detalles de Facturación**
     def agregar_detalle_factura(detalles):
+        styles = getSampleStyleSheet()
+        descripcion_style = ParagraphStyle(
+            name="DescripcionDetalleFactura",
+            parent=styles["Normal"],
+            fontName="Helvetica",
+            fontSize=7,
+            leading=8,
+            alignment=0  # Alineado a la izquierda
+        )
+        
         factura_detalles = [
             ["#", "Descripción", "U. Med", "Cantidad", "Valor Unitario", "% Imp.", "Descuento", "Total"]
         ]
@@ -236,7 +243,7 @@ def generar_pdf(factura):
         for detalle in detalles:
             factura_detalles.append([
                 detalle["numero_linea"],
-                detalle["descripcion"],
+                Paragraph(detalle["descripcion"], descripcion_style),
                 detalle["unidad_de_cantidad"],
                 detalle["cantidad"],
                 f"${float(detalle['valor_unitario']):,.2f}",
@@ -383,6 +390,21 @@ def generar_pdf(factura):
     pdf.build(elements, onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura), 
               onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura))
     buffer.seek(0)
-    s3_client.upload_fileobj(buffer, S3_BUCKET_NAME, f"factura_{factura['encabezado']['documento']}.pdf")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    pdf_filename = f"cufe_{factura['cufe']}_{timestamp}.pdf"
 
-    return f"factura_{factura['encabezado']['documento']}.pdf"
+    # 🗓️ Obtener fecha actual
+    fecha_actual = datetime.now()
+    anio = str(fecha_actual.year)
+    mes = f"{fecha_actual.month:02d}"
+    dia = f"{fecha_actual.day:02d}"
+
+    # 📂 NIT de la empresa
+    nit = factura["datos_obligado"]["documento_obligado"]
+
+    # 🛣️ Ruta dentro del bucket
+    ruta_s3 = f"{nit}/{anio}/{mes}/{dia}/{pdf_filename}"
+
+    s3_client.upload_fileobj(buffer, S3_BUCKET_NAME, ruta_s3)
+
+    return f"{nit}/{anio}/{mes}/{dia}/{pdf_filename}"
