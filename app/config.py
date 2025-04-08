@@ -8,7 +8,7 @@ class Config:
     DATABASE_URL = "sqlite:///facturas.db"
     SECRET_KEY = os.getenv("SECRET_KEY", "supersecreto")
     ALGORITHM = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES = 30
+    ACCESS_TOKEN_EXPIRE_MINUTES = 1440
 
 # Crear directorios si no existen
 os.makedirs(Config.PDF_OUTPUT_PATH, exist_ok=True)
