@@ -9,9 +9,36 @@ import boto3
 import base64
 import os
 from app.services.qr_generator import generar_qr
+from reportlab.pdfgen import canvas as canvas_module
 from dotenv import load_dotenv
 
 load_dotenv()
+
+class NumberedCanvas(canvas_module.Canvas):
+    def __init__(self, *args, **kwargs):
+        super(NumberedCanvas, self).__init__(*args, **kwargs)
+        self._saved_page_states = []
+
+    def showPage(self):
+        self._saved_page_states.append(dict(self.__dict__))  # Guarda el estado
+        self._startPage()  # Prepara una nueva página sin dibujar aún
+
+    def save(self):
+        total_pages = len(self._saved_page_states)
+
+        for state in self._saved_page_states:
+            self.__dict__.update(state)
+            self.draw_page_number(total_pages)
+            super(NumberedCanvas, self).showPage()
+
+        super(NumberedCanvas, self).save()
+
+    def draw_page_number(self, total_pages):
+        page_width = letter[0]
+        text_y = 30
+        self.setFont("Helvetica", 6)
+        page_num_text = f"Página {self._pageNumber} de {total_pages}"
+        self.drawRightString(page_width - 28, text_y, page_num_text)
 
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_REGION = os.getenv("S3_REGION")
@@ -42,7 +69,7 @@ def agregar_direccion_contacto(canvas, doc, factura):
 def agregar_autorretenedores(canvas, doc, factura):
     canvas.saveState()
     notas_texto = factura.get("datos_adicionales", {}).get(
-        "notas_pie_pagina", "Autorretenedores: Información no disponible"
+        "notas_pie_pagina", "Autorretenedores: Información no disponible."
     )
     canvas.setFont("Helvetica", 7)
     page_width = letter[0]
@@ -65,11 +92,8 @@ def agregar_pie_pagina(canvas, doc, factura):
     text_y = 30  # Ajuste de altura para el texto
     canvas.drawCentredString(page_width / 2 - 40, text_y, proveedor_texto)  # Movemos un poco más a la izquierda
     
-    # 📌 Número de página a la derecha
-    num_pagina = f"Página {doc.page}"
-    canvas.drawRightString(page_width - 28, text_y, num_pagina)
-
     # ✅ Agregar el logo desde Base64
+    
     logo_base64 = factura.get("datos_documento", {}).get("logo", None)
     
     if logo_base64:
@@ -80,8 +104,8 @@ def agregar_pie_pagina(canvas, doc, factura):
             logo_image = ImageReader(logo_buffer)
 
             # 🔹 Definir la posición del logo en el pie de página
-            logo_width = 40  # Ajuste fino del tamaño
-            logo_height = 15
+            logo_width = 79  # Ajuste fino del tamaño
+            logo_height = 20
             logo_x = page_width / 2 + 130  # Movemos un poco a la derecha para evitar solapamiento
             logo_y = text_y - 6  # Bajamos un poco el logo para mejor alineación
 
@@ -99,10 +123,26 @@ def primera_pagina(canvas, doc, factura):
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
 
+    canvas.saveState()
+    canvas.setFont("Helvetica-Bold", 7)
+    canvas.setFillColor(colors.grey)
+    canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['fecha_validacion_dian']}")
+    canvas.restoreState()
+
 def paginas_siguientes(canvas, doc, factura):
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
+
+    canvas.saveState()
+    canvas.setFont("Helvetica-Bold", 7)
+    canvas.setFillColor(colors.grey)
+    canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['fecha_validacion_dian']}")
+    canvas.restoreState()
 
 def generar_pdf(factura):
     buffer = BytesIO()
@@ -120,15 +160,23 @@ def generar_pdf(factura):
 
     # **Encabezado Principal**
     def agregar_encabezado():
+        razon_social_style = ParagraphStyle(
+            name="RazonSocialTitle",
+            fontName="Helvetica-Bold",
+            fontSize=16,
+            alignment=1,
+            spaceAfter=6
+        )
+
         header_data = [
-            [Paragraph(f"<b>{factura['datos_obligado']['razon_social']}</b>", styles["Title"])]
+            [Paragraph(f"<b>{factura['datos_obligado']['razon_social']}</b>", razon_social_style)]
         ]
         header_table = Table(header_data, colWidths=[500])
         header_table.setStyle(TableStyle([
             ("ALIGN", (0, 0), (-1, -1), "CENTER"),
         ]))
         elements.append(header_table)
-        elements.append(Spacer(1, 5))
+        elements.append(Spacer(1, 20))
 
         # **Información Fija (Izquierda) + QR (Centro) + Factura Electrónica (Derecha)**
         datos_obligado = factura.get("datos_obligado", {})
@@ -141,6 +189,16 @@ def generar_pdf(factura):
         ]
         info_paragraphs = [Paragraph(f"<b>{line}</b>", styles["Normal"]) for line in info_fija]
 
+        logo_ofe_b64 = factura.get("datos_obligado", {}).get("logo_ofe")
+        logo_ofe_img = None
+        if logo_ofe_b64:
+            try:
+                logo_data = base64.b64decode(logo_ofe_b64)
+                logo_buffer = BytesIO(logo_data)
+                logo_ofe_img = Image(logo_buffer, width=90, height=60)  # Ajusta el tamaño si lo deseas
+            except Exception as e:
+                print(f"⚠️ Error al cargar logo_ofe: {e}")
+
         qr_code = generar_qr(factura['qr'])
         qr_path = "temp_qr.png"
         with open(qr_path, "wb") as f:
@@ -150,7 +208,7 @@ def generar_pdf(factura):
 
         factura_info = Table([
             [Paragraph("<b>Factura electrónica de venta</b>", styles["Normal"])],
-            [Paragraph(f"<b>{factura['encabezado']['documento']}</b>", styles["Normal"])]
+            [Paragraph(f"<b>{factura['encabezado']['prefijo']}{factura['encabezado']['id_factura']}</b>", styles["Normal"])]
         ], colWidths=[120])
         factura_info.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 1, colors.black),
@@ -158,8 +216,8 @@ def generar_pdf(factura):
         ]))
 
         header_row = Table([
-            [info_paragraphs, qr_image, factura_info]
-        ], colWidths=[200, 100, 150])
+            [[logo_ofe_img] if logo_ofe_img else [""],info_paragraphs, qr_image, factura_info]
+        ], colWidths=[140, 210, 100, 140])
 
         header_row.setStyle(TableStyle([
             ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -378,17 +436,76 @@ def generar_pdf(factura):
     agregar_encabezado()
     agregar_info_cliente()
     
-    for i in range(0, len(factura["detalle_factura"]), 15):
-        if i > 0:
-            elements.append(PageBreak())  
+    styles = getSampleStyleSheet()
+    descripcion_style = ParagraphStyle(
+        name="DescripcionDetalleFactura",
+        parent=styles["Normal"],
+        fontName="Helvetica",
+        fontSize=7,
+        leading=8,
+        alignment=0
+    )
+
+    max_altura_pagina = 300
+    altura_actual = 100
+    buffer_filas = []
+
+    def agregar_tabla_detalle(buffer_filas):
+        if not buffer_filas:
+            return
+
+        tabla = Table(
+            [["#", "Descripción", "U. Med", "Cantidad", "Valor Unitario", "% Imp.", "Descuento", "Total"]] + buffer_filas,
+            colWidths=[25, 180, 40, 40, 75, 50, 75, 75]
+        )
+        tabla.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('LINEBEFORE', (1, 0), (-1, -1), 1, colors.black),
+            ('LINEABOVE', (0, 1), (-1, -1), 1, colors.white),
+            ('LINEBELOW', (0, 0), (-1, -1), 1, colors.white),
+            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('FONTSIZE', (0, 0), (-1, -1), 7),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+            ('TOPPADDING', (0, 0), (-1, -1), 2),
+        ]))
+        elements.append(tabla)
+        elements.append(Spacer(1, 8))
+
+    for i, detalle in enumerate(factura["detalle_factura"]):
+        parrafo = Paragraph(detalle["descripcion"], descripcion_style)
+        altura_parrafo = parrafo.wrap(180, 0)[1]  # ancho columna descripción
+        altura_fila = max(altura_parrafo, 10) + 4  # padding
+
+        if altura_actual + altura_fila > max_altura_pagina:
+            agregar_tabla_detalle(buffer_filas)
+            buffer_filas = []
+            altura_actual = 0
+            elements.append(PageBreak())
             agregar_encabezado()
             agregar_info_cliente()
-        agregar_detalle_factura(factura["detalle_factura"][i:i+15])
-        agregar_totales()
-        agregar_sector_salud()
 
+        buffer_filas.append([
+            detalle["numero_linea"],
+            parrafo,
+            detalle["unidad_de_cantidad"],
+            detalle["cantidad"],
+            f"${float(detalle['valor_unitario']):,.2f}",
+            f"{detalle['impuestos_detalle']['porcentaje_impuesto']}%",
+            f"${float(detalle['cargo_descuento']['valor_cargo_descuento']):,.2f}",
+            f"${float(detalle['valor_total_detalle']):,.2f}",
+        ])
+        altura_actual += altura_fila
+
+    # Agregar últimos elementos + totales
+    agregar_tabla_detalle(buffer_filas)
+    agregar_totales()
+    agregar_sector_salud()
     pdf.build(elements, onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura), 
-              onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura))
+              onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),canvasmaker=NumberedCanvas)
     buffer.seek(0)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     pdf_filename = f"cufe_{factura['cufe']}_{timestamp}.pdf"
