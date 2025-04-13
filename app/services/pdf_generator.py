@@ -53,9 +53,9 @@ s3_client = boto3.client(
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
     direccion_texto = (
-        f"Dir.: {factura['datos_obligado']['direccion']} {factura['datos_obligado']['depto_ciudad']}, "
-        f"Tel.: {factura['datos_obligado']['telefono']}, "
-        f"Email: {factura['datos_obligado']['email']}"
+        f"Dir.: {factura['receptor']['direccion']} {factura['receptor']['ciudad']}, "
+        f"Tel.: {factura['receptor']['numero_movil']}, "
+        f"Email: {factura['receptor']['correo_electronico']}"
     )
     canvas.setFont("Helvetica", 7)
     page_width = letter[0]
@@ -68,7 +68,7 @@ def agregar_direccion_contacto(canvas, doc, factura):
 # **Función para los Autorretenedores**
 def agregar_autorretenedores(canvas, doc, factura):
     canvas.saveState()
-    notas_texto = factura.get("datos_adicionales", {}).get(
+    notas_texto = factura.get("documento", {}).get(
         "notas_pie_pagina", "Autorretenedores: Información no disponible."
     )
     canvas.setFont("Helvetica", 7)
@@ -94,7 +94,7 @@ def agregar_pie_pagina(canvas, doc, factura):
     
     # ✅ Agregar el logo desde Base64
     
-    logo_base64 = factura.get("datos_documento", {}).get("logo", None)
+    logo_base64 = factura.get("afacturar", {}).get("logo", None)
     
     if logo_base64:
         try:
@@ -128,7 +128,7 @@ def primera_pagina(canvas, doc, factura):
     canvas.setFillColor(colors.grey)
     canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
-    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['fecha_validacion_dian']}")
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
 
 def paginas_siguientes(canvas, doc, factura):
@@ -141,7 +141,7 @@ def paginas_siguientes(canvas, doc, factura):
     canvas.setFillColor(colors.grey)
     canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
-    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['fecha_validacion_dian']}")
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
 
 def generar_pdf(factura):
@@ -169,7 +169,7 @@ def generar_pdf(factura):
         )
 
         header_data = [
-            [Paragraph(f"<b>{factura['datos_obligado']['razon_social']}</b>", razon_social_style)]
+            [Paragraph(f"<b>{factura['emisor']['razon_social']}</b>", razon_social_style)]
         ]
         header_table = Table(header_data, colWidths=[500])
         header_table.setStyle(TableStyle([
@@ -179,17 +179,17 @@ def generar_pdf(factura):
         elements.append(Spacer(1, 20))
 
         # **Información Fija (Izquierda) + QR (Centro) + Factura Electrónica (Derecha)**
-        datos_obligado = factura.get("datos_obligado", {})
+        emisor = factura.get("emisor", {})
         info_fija = [
-            f"NIT: {datos_obligado.get('documento_obligado', 'N/A')}",
-            f"Actividad Económica: {datos_obligado.get('actividad_economica', 'N/A')}",
-            f"Régimen: {datos_obligado.get('regimen', 'N/A')}",
-            f"Responsable IVA: {datos_obligado.get('responsable_iva', 'N/A')}",
-            f"Tarifa ICA: {datos_obligado.get('tarifa_ica', 'N/A')}"
+            f"NIT: {emisor.get('documento', 'N/A')}",
+            f"Actividad Económica: {emisor.get('actividad_economica', 'N/A')}",
+            f"Régimen: {emisor.get('regimen', 'N/A')}",
+            f"Responsable IVA: {emisor.get('responsable_iva', 'N/A')}",
+            f"Tarifa ICA: {emisor.get('tarifa_ica', 'N/A')}"
         ]
         info_paragraphs = [Paragraph(f"<b>{line}</b>", styles["Normal"]) for line in info_fija]
 
-        logo_ofe_b64 = factura.get("datos_obligado", {}).get("logo_ofe")
+        logo_ofe_b64 = factura.get("emisor", {}).get("logo")
         logo_ofe_img = None
         if logo_ofe_b64:
             try:
@@ -199,7 +199,7 @@ def generar_pdf(factura):
             except Exception as e:
                 print(f"⚠️ Error al cargar logo_ofe: {e}")
 
-        qr_code = generar_qr(factura['qr'])
+        qr_code = generar_qr(factura['documento']['img_qr'])
         qr_path = "temp_qr.png"
         with open(qr_path, "wb") as f:
             f.write(qr_code.getbuffer())
@@ -208,7 +208,7 @@ def generar_pdf(factura):
 
         factura_info = Table([
             [Paragraph("<b>Factura electrónica de venta</b>", styles["Normal"])],
-            [Paragraph(f"<b>{factura['encabezado']['prefijo']}{factura['encabezado']['id_factura']}</b>", styles["Normal"])]
+            [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", styles["Normal"])]
         ], colWidths=[120])
         factura_info.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 1, colors.black),
@@ -235,31 +235,31 @@ def generar_pdf(factura):
 
         # Filas organizadas correctamente
         cliente_data += [
-            ["Nombre:", factura["informacion_adquiriente"]["nombre"]["razon_social"],
-            "Correo Electrónico:", factura["informacion_adquiriente"]["correo_electronico"]],
+            ["Nombre:", factura["receptor"]["nombre"],
+            "Correo Electrónico:", factura["receptor"]["correo_electronico"]],
             
-            ["NIT:", factura["informacion_adquiriente"]["identificacion"],
-            "Teléfono:", factura["informacion_adquiriente"]["numero_movil"]],
+            ["NIT:", factura["receptor"]["identificacion"],
+            "Teléfono:", factura["receptor"]["numero_movil"]],
 
-            ["Dirección:", factura["informacion_adquiriente"]["direccion"],
-            "Ciudad:", factura["informacion_adquiriente"]["ciudad"]],
+            ["Dirección:", factura["receptor"]["direccion"],
+            "Ciudad:", factura["receptor"]["ciudad"]],
 
-            ["Departamento:", factura["informacion_adquiriente"]["departamento"],
-            "País:", factura["informacion_adquiriente"]["pais"]],
+            ["Departamento:", factura["receptor"]["departamento"],
+            "País:", factura["receptor"]["pais"]],
 
-            ["Moneda:", factura["encabezado"]["moneda"],
-            "Método de pago:", factura["encabezado"]["metodo_de_pago"]],
+            ["Moneda:", factura["documento"]["moneda"],
+            "Método de pago:", factura["documento"]["metodo_de_pago"]],
 
-            ["Tipo de pago:", factura["encabezado"]["tipo_de_pago"],
-            "Condición de pago:", "Sin especificar"],
+            ["Tipo de pago:", factura["documento"]["tipo_de_pago"],
+            "Condición de pago:", factura["documento"]["condicion_de_pago"]],
 
-            ["Orden de Compra:", factura["encabezado"]["numero_orden"],
-            "Tipo de pago:", factura["encabezado"]["tipo_de_pago"]],
+            ["Orden de Compra:", factura["documento"]["numero_orden"],
+            "Tipo de pago:", factura["documento"]["tipo_de_pago"]],
 
-            ["Fecha y Hora de expedición:", f"{factura['encabezado']['fecha']} {factura['encabezado']['hora']}",
-            "Fecha de Vencimiento:", factura["encabezado"]["fecha_vencimiento"]],
+            ["Fecha y Hora de expedición:", f"{factura['documento']['fecha']} {factura['documento']['hora']}",
+            "Fecha de Vencimiento:", factura["documento"]["fecha_vencimiento"]],
 
-            ["CUFE:", factura["cufe"], "", ""],
+            ["CUFE:", factura["documento"]["cufe"], "", ""],
             ["", "", "", ""]
         ]
 
@@ -352,15 +352,15 @@ def generar_pdf(factura):
 
         # Texto de la autorización de la numeración de facturación con el nuevo estilo
         texto_resolucion = Paragraph(
-            factura["datos_adicionales"]["resolucion"], estilo_resolucion
+            factura["otros"]["resolucion"], estilo_resolucion
         )
 
         totales_data = [
-            [texto_resolucion, "Subtotal:", f"${float(factura['valor_factura']['valor_base']):,.2f}"],
-            ["", "Descuento:", f"${float(factura['valor_factura']['valor_descuento_total']):,.2f}"],
-            ["", "IVA:", f"${float(factura['valor_factura']['valor_total_impuesto_1']):,.2f}"],
-            ["", "Anticipo:", f"${float(factura['valor_factura']['valor_anticipo']):,.2f}"],
-            ["", "Total a Pagar:", f"${float(factura['valor_factura']['valor_total_a_pagar']):,.2f}"]
+            [texto_resolucion, "Subtotal:", f"${float(factura['valores_totales']['valor_base']):,.2f}"],
+            ["", "Descuento:", f"${float(factura['valores_totales']['valor_descuento_total']):,.2f}"],
+            ["", "IVA:", f"${float(factura['valores_totales']['valor_total_impuesto_1']):,.2f}"],
+            ["", "Anticipo:", f"${float(factura['valores_totales']['valor_anticipo']):,.2f}"],
+            ["", "Total a Pagar:", f"${float(factura['valores_totales']['valor_total_a_pagar']):,.2f}"]
         ]
 
         # **Ajuste de anchos para mantener el total alineado**
@@ -401,7 +401,7 @@ def generar_pdf(factura):
     # **Datos Adicionales del Sector Salud**
     def agregar_sector_salud():
         # **Extraer la colección de información adicional**
-        datos_salud = factura["datos_adicionales"]
+        datos_salud = factura["otros"]
 
         sector_data = [
             [Paragraph("<b>Datos Adicionales del Sector Salud</b>", styles["Normal"])],  # **Encabezado**
@@ -446,7 +446,7 @@ def generar_pdf(factura):
         alignment=0
     )
 
-    max_altura_pagina = 300
+    max_altura_pagina = 320
     altura_actual = 100
     buffer_filas = []
 
@@ -475,10 +475,10 @@ def generar_pdf(factura):
         elements.append(tabla)
         elements.append(Spacer(1, 8))
 
-    for i, detalle in enumerate(factura["detalle_factura"]):
+    for i, detalle in enumerate(factura["detalles"]):
         parrafo = Paragraph(detalle["descripcion"], descripcion_style)
         altura_parrafo = parrafo.wrap(180, 0)[1]  # ancho columna descripción
-        altura_fila = max(altura_parrafo, 10) + 4  # padding
+        altura_fila = max(altura_parrafo, 5) + 4  # padding
 
         if altura_actual + altura_fila > max_altura_pagina:
             agregar_tabla_detalle(buffer_filas)
@@ -508,7 +508,7 @@ def generar_pdf(factura):
               onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),canvasmaker=NumberedCanvas)
     buffer.seek(0)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    pdf_filename = f"cufe_{factura['cufe']}_{timestamp}.pdf"
+    pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"
 
     # 🗓️ Obtener fecha actual
     fecha_actual = datetime.now()
@@ -517,7 +517,7 @@ def generar_pdf(factura):
     dia = f"{fecha_actual.day:02d}"
 
     # 📂 NIT de la empresa
-    nit = factura["datos_obligado"]["documento_obligado"]
+    nit = factura["receptor"]["identificacion"]
 
     # 🛣️ Ruta dentro del bucket
     ruta_s3 = f"{nit}/{anio}/{mes}/{dia}/{pdf_filename}"

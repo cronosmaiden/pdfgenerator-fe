@@ -8,22 +8,16 @@ router = APIRouter()
 @router.post("/generar_pdf/")
 async def generar_pdf_endpoint(request: FacturaRequest, user: dict = Depends(get_current_user)):
     """
-    Endpoint para generar PDFs de facturas y obtener sus nombres en S3.
+    Endpoint para generar un PDF de una única factura y obtener su nombre en S3.
     """
     try:
-        facturas_generadas = []
-        
-        # Procesar cada factura en la lista de facturas
-        for factura in request.facturas:
-            pdf_filename = generar_pdf(factura.dict())  # Generar el PDF
-            
-            # Guardar el nombre del archivo generado
-            facturas_generadas.append({"archivo_s3": pdf_filename})
+        # Generar el PDF con los datos directamente del objeto recibido
+        pdf_filename = generar_pdf(request.dict())
 
         return {
-            "mensaje": "PDFs generados y subidos a S3 correctamente",
-            "facturas": facturas_generadas
+            "mensaje": "PDF generado y subido a S3 correctamente",
+            "archivo_s3": pdf_filename
         }
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al generar el PDF: {str(e)}")
-
