@@ -290,7 +290,9 @@ def generar_pdf(factura):
             parent=normal_style,
             fontName="Helvetica-Bold",
             fontSize=7,
+            spaceAfter=0,
             textColor=colors.gray
+            
         )
 
         negrita_titulos = ParagraphStyle(
@@ -301,6 +303,7 @@ def generar_pdf(factura):
             textColor=colors.whitesmoke
         )
 
+        
         # Título principal
         color_fondo_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")  # fallback: gris
         color_fondo_rgb = hex_to_rgb_color(color_fondo_hex)
@@ -367,14 +370,13 @@ def generar_pdf(factura):
             [Paragraph("CUFE:", negrita_7), factura["documento"]["cufe"]]
         ], colWidths=[60, 500])
         seccion_4.setStyle(TableStyle([
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
             ('LINEABOVE', (0, 0), (-1, 0), 0.5, colors.black),
             ('LINEBELOW', (0, 0), (-1, 0), 0.5, colors.black),
             ('LINEBEFORE', (0, 0), (0, 0), 0.5, colors.black),
             ('LINEAFTER', (-1, 0), (-1, 0), 0.5, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 7),
-            ('TOPPADDING', (0, 0), (-1, -1), 0.5),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5),
         ]))
         elements.append(seccion_4)
         elements.append(Spacer(1, 8))
@@ -500,10 +502,21 @@ def generar_pdf(factura):
     # **Datos Adicionales del Sector Salud**
     def agregar_sector_salud():
         # **Extraer la colección de información adicional**
+        
+        normal_style = styles["Normal"]
+
+        negrita_titulos = ParagraphStyle(
+            name="Negrita7",
+            parent=normal_style,
+            fontName="Helvetica-Bold",
+            fontSize=8,
+            textColor=colors.whitesmoke
+        )
+        
         datos_salud = factura["otros"]
 
         sector_data = [
-            [Paragraph("<b>Datos Adicionales del Sector Salud</b>", styles["Normal"])],  # **Encabezado**
+            [Paragraph("<b>Datos Adicionales del Sector Salud</b>", negrita_titulos)],  # **Encabezado**
             [datos_salud.get("salud_1", ""), "", datos_salud.get("salud_2", ""), ""],  # Cobertura y modalidad de pago
             [datos_salud.get("salud_3", ""), "", datos_salud.get("salud_7", ""), ""],  # Código prestador y número de contrato
             [datos_salud.get("salud_4", ""), "", datos_salud.get("salud_5", ""), ""],  # Número de póliza y copago
@@ -516,13 +529,10 @@ def generar_pdf(factura):
         sector_table.setStyle(TableStyle([
             ('SPAN', (0, 0), (-1, 0)),  # **Fusionar el título en toda la fila**
             ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-
             ('BACKGROUND', (0, 0), (-1, 0), color_rgb),  # **Fondo gris para el título**
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-
             ('GRID', (0, 1), (-1, -1), 1, colors.white),  # **Bordes internos blancos**
             ('BOX', (0, 0), (-1, -1), 1.5, colors.black),  # **Bordes exteriores negros**
-
             ('FONTSIZE', (0, 0), (-1, -1), 7),  # **Tamaño de letra adecuado**
             ('LEADING', (0, 0), (-1, -1), 8),  # **Espaciado vertical reducido**
             ('BOTTOMPADDING', (0, 0), (-1, -1), 0),  # **Reduce el padding inferior**
@@ -530,6 +540,52 @@ def generar_pdf(factura):
         ]))
 
         elements.append(sector_table)
+        elements.append(Spacer(1, 8))
+
+    def agregar_obs_documento():
+        normal_style = styles["Normal"]
+
+        negrita_titulos = ParagraphStyle(
+            name="Negrita7",
+            parent=normal_style,
+            fontName="Helvetica-Bold",
+            fontSize=8,
+            textColor=colors.whitesmoke
+        )
+
+        texto_obs = factura["otros"].get("informacion_adicional", "")
+        
+        # 👉 Estilo del contenido largo
+        estilo_contenido = ParagraphStyle(
+            name="ContenidoObservaciones",
+            parent=normal_style,
+            fontName="Helvetica",
+            fontSize=7,
+            leading=9,          # Espaciado vertical
+            alignment=0,        # Izquierda
+        )
+
+        obs_data = [
+            [Paragraph("<b>Observaciones Documento</b>", negrita_titulos)],
+            [Paragraph(texto_obs, estilo_contenido), "", "", ""]
+        ]
+
+        obs_table = Table(obs_data, colWidths=[100, 180, 100, 180])
+        obs_table.setStyle(TableStyle([
+            ('SPAN', (0, 0), (-1, 0)),  # Encabezado
+            ('SPAN', (0, 1), (-1, 1)),  # 👈 También fusionamos toda la fila del contenido
+            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+            ('BACKGROUND', (0, 0), (-1, 0), color_rgb),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('GRID', (0, 1), (-1, -1), 1, colors.white),
+            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('FONTSIZE', (0, 0), (-1, -1), 7),
+            ('LEADING', (0, 0), (-1, -1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+            ('TOPPADDING', (0, 0), (-1, -1), 2),
+        ]))
+
+        elements.append(obs_table)
         elements.append(Spacer(1, 8))
 
     agregar_encabezado()
@@ -603,6 +659,10 @@ def generar_pdf(factura):
     agregar_tabla_detalle(buffer_filas)
     agregar_totales()
     agregar_sector_salud()
+    texto_obs = factura.get("otros", {}).get("informacion_adicional", "")
+    if texto_obs and texto_obs.strip():
+        agregar_obs_documento()
+        
     pdf.build(elements, onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura), 
               onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),
               canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs))
