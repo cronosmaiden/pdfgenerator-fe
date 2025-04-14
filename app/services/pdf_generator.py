@@ -3,6 +3,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
+from reportlab.lib.colors import Color
 from io import BytesIO
 from reportlab.lib.utils import ImageReader
 import boto3
@@ -15,8 +16,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class NumberedCanvas(canvas_module.Canvas):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, factura=None, **kwargs):
         super(NumberedCanvas, self).__init__(*args, **kwargs)
+        self.factura = factura
         self._saved_page_states = []
 
     def showPage(self):
@@ -36,7 +38,13 @@ class NumberedCanvas(canvas_module.Canvas):
     def draw_page_number(self, total_pages):
         page_width = letter[0]
         text_y = 30
+
+        color_hex = self.factura.get("caracteristicas", {}).get("pie_de_pagina", {}).get("Color_texto", "#000000")
+        color_rgb = hex_to_rgb_color(color_hex)
+
         self.setFont("Helvetica", 6)
+        self.setFillColor(color_rgb)
+
         page_num_text = f"Página {self._pageNumber} de {total_pages}"
         self.drawRightString(page_width - 28, text_y, page_num_text)
 
@@ -48,7 +56,28 @@ s3_client = boto3.client(
     region_name=S3_REGION
 )
 
-# **Función para la dirección de contacto**
+def hex_to_rgb_color(hex_string: str) -> Color:
+    hex_string = hex_string.lstrip("#")
+    r, g, b = tuple(int(hex_string[i:i+2], 16) for i in (0, 2, 4))
+    return Color(r / 255.0, g / 255.0, b / 255.0)
+
+def agregar_marca_agua(canvas, factura):
+    texto_marca = factura["documento"].get("marca_agua", "")
+    if not texto_marca:
+        return
+
+    canvas.saveState()
+    canvas.setFont("Helvetica-Bold", 50)
+    canvas.setFillGray(0.85, 0.4)  # Gris claro con transparencia
+
+    # Coordenadas centrales
+    width, height = letter
+    canvas.translate(width / 2, height / 2)
+    canvas.rotate(45)
+    canvas.drawCentredString(0, 0, texto_marca.upper())
+
+    canvas.restoreState()
+
 # **Función para la dirección de contacto**
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
@@ -81,35 +110,38 @@ def agregar_autorretenedores(canvas, doc, factura):
 
 # **Función para el pie de página**
 def agregar_pie_pagina(canvas, doc, factura):
+    color_texto_footer_hex = factura.get("caracteristicas", {}).get("pie_de_pagina", {}).get("Color_texto", "#000000")
+    color_texto_footer_rgb = hex_to_rgb_color(color_texto_footer_hex)
     canvas.saveState()
     
     # 📌 Texto del proveedor
     proveedor_texto = "Proveedor Tecnológico: Teleinte SAS - NIT: 830.020.470-5 / Nombre del software: Afacturar.com www.afacturar.com"
+    
+    page_width = letter[0]
+    text_y = 30
+
     canvas.setFont("Helvetica", 6)
     
-    # 📌 Mantener en la parte inferior centrado
-    page_width = letter[0]
-    text_y = 30  # Ajuste de altura para el texto
-    canvas.drawCentredString(page_width / 2 - 40, text_y, proveedor_texto)  # Movemos un poco más a la izquierda
-    
-    # ✅ Agregar el logo desde Base64
-    
+    # ✅ Usa el color que obtuvimos dinámicamente
+    canvas.setFillColor(color_texto_footer_rgb)
+
+    # Texto centrado
+    canvas.drawCentredString(page_width / 2 - 40, text_y, proveedor_texto)
+
+    # ✅ Agregar logo en el pie
     logo_base64 = factura.get("afacturar", {}).get("logo", None)
-    
+
     if logo_base64:
         try:
-            # 🔹 Decodificar la imagen base64
             logo_data = base64.b64decode(logo_base64)
             logo_buffer = BytesIO(logo_data)
             logo_image = ImageReader(logo_buffer)
 
-            # 🔹 Definir la posición del logo en el pie de página
-            logo_width = 79  # Ajuste fino del tamaño
+            logo_width = 79
             logo_height = 20
-            logo_x = page_width / 2 + 130  # Movemos un poco a la derecha para evitar solapamiento
-            logo_y = text_y - 6  # Bajamos un poco el logo para mejor alineación
+            logo_x = page_width / 2 + 130
+            logo_y = text_y - 6
 
-            # 🔹 Dibujar la imagen en el canvas
             canvas.drawImage(logo_image, logo_x, logo_y, width=logo_width, height=logo_height, mask='auto')
 
         except Exception as e:
@@ -119,19 +151,22 @@ def agregar_pie_pagina(canvas, doc, factura):
 
 # **Funciones para manejar encabezado y pie de página correctamente**
 def primera_pagina(canvas, doc, factura):
+    agregar_marca_agua(canvas, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
+    
 
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.translate(15, 600)  # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
 
 def paginas_siguientes(canvas, doc, factura):
+    agregar_marca_agua(canvas, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
@@ -139,7 +174,7 @@ def paginas_siguientes(canvas, doc, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(10, 200)  # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.translate(15, 600) # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
@@ -158,6 +193,14 @@ def generar_pdf(factura):
     styles = getSampleStyleSheet()
     elements = []
 
+    color_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")
+    color_rgb = hex_to_rgb_color(color_hex)
+
+    color_texto_encabezado_hex = factura.get("caracteristicas", {}).get("encabezado", {}).get("Color_texto", "#000000")
+    color_texto_encabezado_rgb = hex_to_rgb_color(color_texto_encabezado_hex)
+
+    
+
     # **Encabezado Principal**
     def agregar_encabezado():
         razon_social_style = ParagraphStyle(
@@ -165,7 +208,16 @@ def generar_pdf(factura):
             fontName="Helvetica-Bold",
             fontSize=16,
             alignment=1,
+            textColor=color_texto_encabezado_rgb,
             spaceAfter=6
+        )
+
+        normal_color_style = ParagraphStyle(
+            name="EncabezadoColorTexto",
+            parent=styles["Normal"],
+            fontName="Helvetica-Bold",
+            fontSize=7,
+            textColor=color_texto_encabezado_rgb  # 👈 Nuevo
         )
 
         header_data = [
@@ -187,7 +239,7 @@ def generar_pdf(factura):
             f"Responsable IVA: {emisor.get('responsable_iva', 'N/A')}",
             f"Tarifa ICA: {emisor.get('tarifa_ica', 'N/A')}"
         ]
-        info_paragraphs = [Paragraph(f"<b>{line}</b>", styles["Normal"]) for line in info_fija]
+        info_paragraphs = [Paragraph(f"<b>{line}</b>", normal_color_style) for line in info_fija]
 
         logo_ofe_b64 = factura.get("emisor", {}).get("logo")
         logo_ofe_img = None
@@ -207,8 +259,8 @@ def generar_pdf(factura):
         qr_image = Image(qr_path, width=70, height=70)
 
         factura_info = Table([
-            [Paragraph("<b>Factura electrónica de venta</b>", styles["Normal"])],
-            [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", styles["Normal"])]
+            [Paragraph("<b>Factura electrónica de venta</b>", normal_color_style)],
+            [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", normal_color_style)]
         ], colWidths=[120])
         factura_info.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 1, colors.black),
@@ -229,58 +281,105 @@ def generar_pdf(factura):
 
     # **Información del Cliente**
     def agregar_info_cliente():
-        cliente_data = [
-            [Paragraph("<b>Información del Cliente</b>", styles["Normal"]), "", "", ""]  # Título centrado en toda la tabla
-        ]
+        styles = getSampleStyleSheet()
+        normal_style = styles["Normal"]
 
-        # Filas organizadas correctamente
-        cliente_data += [
-            ["Nombre:", factura["receptor"]["nombre"],
-            "Correo Electrónico:", factura["receptor"]["correo_electronico"]],
-            
-            ["NIT:", factura["receptor"]["identificacion"],
-            "Teléfono:", factura["receptor"]["numero_movil"]],
+        # Nuevo estilo negrita con tamaño 7
+        negrita_7 = ParagraphStyle(
+            name="Negrita7",
+            parent=normal_style,
+            fontName="Helvetica-Bold",
+            fontSize=7,
+            textColor=colors.gray
+        )
 
-            ["Dirección:", factura["receptor"]["direccion"],
-            "Ciudad:", factura["receptor"]["ciudad"]],
+        negrita_titulos = ParagraphStyle(
+            name="Negrita7",
+            parent=normal_style,
+            fontName="Helvetica-Bold",
+            fontSize=8,
+            textColor=colors.whitesmoke
+        )
 
-            ["Departamento:", factura["receptor"]["departamento"],
-            "País:", factura["receptor"]["pais"]],
+        # Título principal
+        color_fondo_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")  # fallback: gris
+        color_fondo_rgb = hex_to_rgb_color(color_fondo_hex)
 
-            ["Moneda:", factura["documento"]["moneda"],
-            "Método de pago:", factura["documento"]["metodo_de_pago"]],
-
-            ["Tipo de pago:", factura["documento"]["tipo_de_pago"],
-            "Condición de pago:", factura["documento"]["condicion_de_pago"]],
-
-            ["Orden de Compra:", factura["documento"]["numero_orden"],
-            "Tipo de pago:", factura["documento"]["tipo_de_pago"]],
-
-            ["Fecha y Hora de expedición:", f"{factura['documento']['fecha']} {factura['documento']['hora']}",
-            "Fecha de Vencimiento:", factura["documento"]["fecha_vencimiento"]],
-
-            ["CUFE:", factura["documento"]["cufe"], "", ""],
-            ["", "", "", ""]
-        ]
-
-        # Crear la tabla con dimensiones homogéneas y anchos bien distribuidos
-        cliente_table = Table(cliente_data, colWidths=[100, 180, 100, 180])
-        cliente_table.setStyle(TableStyle([
-            ('SPAN', (0, 0), (-1, 0)),  
-            ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-                                              
-            ('BACKGROUND', (0, 0), (-1, 0), colors.gray),  
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                                                        
-            ('GRID', (0, 1), (-1, -1), 1, colors.white),
+        titulo = Table([[Paragraph("Información del Cliente", negrita_titulos)]], colWidths=[560])
+        titulo.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, -1), color_fondo_rgb),
+            ('TEXTCOLOR', (0, 0), (-1, -1), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 7),
-            ('LEADING', (0, 0), (-1, -1), 8),  # Reduce el espacio vertical en las celdas
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),  # Reduce el padding inferior de cada celda
-            ('TOPPADDING', (0, 0), (-1, -1), 0),  # Reduce el padding superior de cada celda
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('TOPPADDING', (0, 0), (-1, -1), 1),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 1),
         ]))
-        elements.append(cliente_table)
-        elements.append(Spacer(1, 10))
+        elements.append(titulo)
+
+        def estilo_subtabla():
+            return TableStyle([
+                ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+                ('LINEABOVE', (0, 0), (-1, 0), 0.5, colors.black),
+                ('LINEBELOW', (0, -1), (-1, -1), 0.5, colors.black),
+                ('LINEBEFORE', (0, 0), (0, -1), 0.5, colors.black),
+                ('LINEAFTER', (-1, 0), (-1, -1), 0.5, colors.black),
+                ('FONTSIZE', (0, 0), (-1, -1), 7),
+                ('TOPPADDING', (0, 0), (-1, -1), 0.5),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5),
+            ])
+
+        # Sección 1
+        seccion_1 = Table([
+            [Paragraph("Nombre:", negrita_7), factura["receptor"]["nombre"],
+            Paragraph("Correo Electrónico:", negrita_7), factura["receptor"]["correo_electronico"]],
+            [Paragraph("NIT:", negrita_7), factura["receptor"]["identificacion"],
+            Paragraph("Teléfono:", negrita_7), factura["receptor"]["numero_movil"]],
+            [Paragraph("Dirección:", negrita_7), factura["receptor"]["direccion"],
+            Paragraph("Ciudad:", negrita_7), factura["receptor"]["ciudad"]],
+            [Paragraph("Departamento:", negrita_7), factura["receptor"]["departamento"],
+            Paragraph("País:", negrita_7), factura["receptor"]["pais"]],
+        ], colWidths=[70, 210, 100, 180])
+        seccion_1.setStyle(estilo_subtabla())
+        elements.append(seccion_1)
+
+        # Sección 2
+        seccion_2 = Table([
+            [Paragraph("Moneda:", negrita_7), factura["documento"]["moneda"],
+            Paragraph("Método de pago:", negrita_7), factura["documento"]["metodo_de_pago"]],
+            [Paragraph("Tipo de pago:", negrita_7), factura["documento"]["tipo_de_pago"],
+            Paragraph("Condición de pago:", negrita_7), factura["documento"]["condicion_de_pago"]],
+            [Paragraph("Orden de Compra:", negrita_7), factura["documento"]["numero_orden"], "", ""]
+        ], colWidths=[100, 180, 100, 180])
+        seccion_2.setStyle(estilo_subtabla())
+        elements.append(seccion_2)
+
+        # Sección 3
+        seccion_3 = Table([
+            [Paragraph("Fecha y Hora de expedición:", negrita_7), f"{factura['documento']['fecha']} {factura['documento']['hora']}",
+            Paragraph("Fecha de Vencimiento:", negrita_7), factura["documento"]["fecha_vencimiento"]],
+        ], colWidths=[120, 200, 120, 120])
+        seccion_3.setStyle(estilo_subtabla())
+        elements.append(seccion_3)
+
+        # Sección 4
+        seccion_4 = Table([
+            [Paragraph("CUFE:", negrita_7), factura["documento"]["cufe"]]
+        ], colWidths=[60, 500])
+        seccion_4.setStyle(TableStyle([
+            ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
+            ('LINEABOVE', (0, 0), (-1, 0), 0.5, colors.black),
+            ('LINEBELOW', (0, 0), (-1, 0), 0.5, colors.black),
+            ('LINEBEFORE', (0, 0), (0, 0), 0.5, colors.black),
+            ('LINEAFTER', (-1, 0), (-1, 0), 0.5, colors.black),
+            ('FONTSIZE', (0, 0), (-1, -1), 7),
+            ('TOPPADDING', (0, 0), (-1, -1), 0.5),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5),
+        ]))
+        elements.append(seccion_4)
+        elements.append(Spacer(1, 8))
+
+
 
     # **Tabla de Detalles de Facturación**
     def agregar_detalle_factura(detalles):
@@ -313,7 +412,7 @@ def generar_pdf(factura):
         detalle_table = Table(factura_detalles, colWidths=[25, 180, 40, 40, 75, 50, 75, 75])
         detalle_table.setStyle(TableStyle([
             # **Encabezado de la tabla con fondo gris y texto blanco**
-            ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+            ('BACKGROUND', (0, 0), (-1, 0), color_rgb),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
 
@@ -418,7 +517,7 @@ def generar_pdf(factura):
             ('SPAN', (0, 0), (-1, 0)),  # **Fusionar el título en toda la fila**
             ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
 
-            ('BACKGROUND', (0, 0), (-1, 0), colors.gray),  # **Fondo gris para el título**
+            ('BACKGROUND', (0, 0), (-1, 0), color_rgb),  # **Fondo gris para el título**
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
 
             ('GRID', (0, 1), (-1, -1), 1, colors.white),  # **Bordes internos blancos**
@@ -459,7 +558,7 @@ def generar_pdf(factura):
             colWidths=[25, 180, 40, 40, 75, 50, 75, 75]
         )
         tabla.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.gray),
+            ('BACKGROUND', (0, 0), (-1, 0), color_rgb),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('LINEBEFORE', (1, 0), (-1, -1), 1, colors.black),
@@ -505,7 +604,8 @@ def generar_pdf(factura):
     agregar_totales()
     agregar_sector_salud()
     pdf.build(elements, onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura), 
-              onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),canvasmaker=NumberedCanvas)
+              onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),
+              canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs))
     buffer.seek(0)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"

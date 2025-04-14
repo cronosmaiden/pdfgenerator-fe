@@ -48,7 +48,7 @@ class Documento(BaseModel):
     ruta_documento: HttpUrl
 
 class EncabezadoCaracteristicas(BaseModel):
-    solo_primera_pagina: str
+    solo_primera_pagina: int
     Color_texto: str
 
 class PieDePagina(BaseModel):
@@ -56,7 +56,7 @@ class PieDePagina(BaseModel):
     Color_texto: str
 
 class Totales(BaseModel):
-    solo_ultima_pagina: str
+    solo_ultima_pagina: int
 
 class Caracteristicas(BaseModel):
     encabezado: EncabezadoCaracteristicas
