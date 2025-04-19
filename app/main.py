@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from app.routes.auth_routes import router as auth_router
 from app.routes.routes import router as pdf_router
 from app.middlewares import LoggingMiddleware
@@ -13,6 +15,19 @@ app.add_middleware(LoggingMiddleware)
 # Manejo de errores globales
 app.add_exception_handler(HTTPException, http_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
+
+# ⛑️ Manejador para errores de validación de datos (422 Unprocessable Entity)
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    logger.error(f"💥 Error de validación en {request.url.path}")
+    logger.error(f"📄 Detalles: {exc.errors()}")
+    return JSONResponse(
+        status_code=422,
+        content={
+            "detail": exc.errors(),
+            "body": exc.body
+        }
+    )
 
 # Incluir las rutas
 app.include_router(auth_router)

@@ -83,6 +83,18 @@ class CargoDescuento(BaseModel):
     valor_base_cargo_descuento: Optional[str] = "0.00"
     valor_cargo_descuento: Optional[str] = "0.00"
 
+class ValoresUnitarios(BaseModel):
+    valor_descuento: Optional[str] = "0.00"
+    valor_con_descuento: Optional[str] = "0.00"
+    valor_impuesto_1: Optional[str] = "0.00"
+    valor_impuesto_2: Optional[str] = "0.00"
+    valor_impuesto_3: Optional[str] = "0.00"
+    valor_impuesto_4: Optional[str] = "0.00"
+    valor_reteiva: Optional[str] = "0.00"
+    valor_retefuente: Optional[str] = "0.00"
+    valor_reteica: Optional[str] = "0.00"
+    valor_a_pagar: Optional[str] = "0.00"
+
 class Regalo(BaseModel):
     es_regalo: bool = False
     cod_precio_referencia: Optional[int] = 0
@@ -107,9 +119,12 @@ class InformacionAdicional(BaseModel):
 class DetalleFactura(BaseModel):
     numero_linea: int
     cantidad: int
+    unidad_medida: Optional[str] = ""
     unidad_de_cantidad: Optional[str] = ""  # Adaptación flexible
+    nombre_unidad_medida: Optional[str] = ""
     valor_unitario: str
     descripcion: str
+    nota_detalle: Optional[str] = ""
     cargo_descuento: Optional[CargoDescuento] = None
     regalo: Optional[Regalo] = Regalo()
     impuestos_detalle: Optional[ImpuestoDetalle] = None
@@ -117,6 +132,9 @@ class DetalleFactura(BaseModel):
     valor_total_detalle_con_cargo_descuento: Optional[str] = "0.00"
     valor_total_detalle: str
     informacion_adicional: Optional[List[InformacionAdicional]] = None
+    marca: Optional[str] = ""
+    modelo: Optional[str] = ""
+    valores_unitarios: Optional[ValoresUnitarios] = None
 
 class ValoresTotales(BaseModel):
     valor_base: str
