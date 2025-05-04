@@ -198,13 +198,16 @@ def generar_pdf(factura):
         == 1
     )
 
-    header_height = 180
+    header_height_first = 180 if solo_primera else 180
+    header_height_later = 120   if solo_primera else 180
 
-    page_height = letter[1]
-    top_margin = pdf.topMargin
+    page_height   = letter[1]
+    top_margin    = pdf.topMargin
     bottom_margin = pdf.bottomMargin
     footer_height = 80
-    available_height = page_height - top_margin - bottom_margin - header_height - footer_height
+
+    available_height_first = page_height - top_margin - bottom_margin - header_height_first - footer_height
+    available_height_later = page_height - top_margin - bottom_margin - header_height_later - footer_height
         
     styles = getSampleStyleSheet()
     elements = []
@@ -617,10 +620,6 @@ def generar_pdf(factura):
         alignment=0
     )
 
-    max_altura_pagina = available_height
-    altura_actual = header_height  
-    buffer_filas = []
-
     def agregar_tabla_detalle(buffer_filas):
         if not buffer_filas:
             return
@@ -646,37 +645,43 @@ def generar_pdf(factura):
         elements.append(tabla)
         elements.append(Spacer(1, 8))
 
-    for i, detalle in enumerate(factura["detalles"]):
-        parrafo = Paragraph(detalle["descripcion"], descripcion_style)
-        altura_parrafo = parrafo.wrap(180, 0)[1]  # ancho columna descripción
-        altura_fila = max(altura_parrafo, 5) + 4   # padding
+    page_number = 1
+    altura_actual = header_height_first
+    buffer_filas = []
 
-        # Si ya no cabe la siguiente fila, dibujamos lo acumulado,
-        # rellenamos el resto de la página y rompemos página.
-        if altura_actual + altura_fila > max_altura_pagina:
-            # 1) Dibujar lo acumulado
+    for detalle in factura["detalles"]:
+        parrafo = Paragraph(detalle["descripcion"], descripcion_style)
+        altura_parrafo = parrafo.wrap(180, 0)[1]
+        altura_fila = max(altura_parrafo, 5) + 4
+
+        # elegimos el espacio disponible según si es página 1 o siguientes
+        current_available = (
+            available_height_first
+            if page_number == 1
+            else available_height_later
+        )
+
+        if altura_actual + altura_fila > current_available:
+            # 1) pintamos lo acumulado
             agregar_tabla_detalle(buffer_filas)
 
-            # 2) Rellenar hasta el footer
-            elements.append(Spacer(1, 10))
+            # 2) rellenamos hasta el footer
+            espacio_restante = current_available - altura_actual
+            if espacio_restante > 0:
+                elements.append(Spacer(1, espacio_restante))
 
-            # 3) Reset
+            # 3) reset buffer y avanzar página
             buffer_filas = []
-
-            # 4) Salto de página
             elements.append(PageBreak())
+            page_number += 1
+            altura_actual = header_height_later
 
-            # 5) Si toca encabezado en esta página:
+            # 4) si no es solo primera, reponemos encabezado
             if not solo_primera:
                 agregar_encabezado()
                 agregar_info_cliente()
-                # ¡y volvemos a arrancar contando el alto del encabezado!
-                altura_actual = header_height
-            else:
-                # si sólo primera, en página 2 comienza directamente tras header+cliente
-                altura_actual = header_height
 
-        # siempre acumulamos la fila en el buffer
+        # 5) acumulamos la fila
         buffer_filas.append([
             detalle["numero_linea"],
             parrafo,
@@ -689,7 +694,7 @@ def generar_pdf(factura):
         ])
         altura_actual += altura_fila
 
-    # Agregar últimos elementos + totales
+    # pintamos lo que quede antes de totales
     agregar_tabla_detalle(buffer_filas)
     agregar_totales()
     agregar_sector_salud()
