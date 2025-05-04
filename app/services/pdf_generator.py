@@ -197,7 +197,15 @@ def generar_pdf(factura):
         .get("solo_primera_pagina", 0)
         == 1
     )
-    
+
+    header_height = 180
+
+    page_height = letter[1]
+    top_margin = pdf.topMargin
+    bottom_margin = pdf.bottomMargin
+    footer_height = 80
+    available_height = page_height - top_margin - bottom_margin - header_height - footer_height
+        
     styles = getSampleStyleSheet()
     elements = []
 
@@ -609,8 +617,8 @@ def generar_pdf(factura):
         alignment=0
     )
 
-    max_altura_pagina = 320
-    altura_actual = 100
+    max_altura_pagina = available_height
+    altura_actual = header_height  
     buffer_filas = []
 
     def agregar_tabla_detalle(buffer_filas):
@@ -641,17 +649,34 @@ def generar_pdf(factura):
     for i, detalle in enumerate(factura["detalles"]):
         parrafo = Paragraph(detalle["descripcion"], descripcion_style)
         altura_parrafo = parrafo.wrap(180, 0)[1]  # ancho columna descripción
-        altura_fila = max(altura_parrafo, 5) + 4  # padding
+        altura_fila = max(altura_parrafo, 5) + 4   # padding
 
+        # Si ya no cabe la siguiente fila, dibujamos lo acumulado,
+        # rellenamos el resto de la página y rompemos página.
         if altura_actual + altura_fila > max_altura_pagina:
+            # 1) Dibujar lo acumulado
             agregar_tabla_detalle(buffer_filas)
+
+            # 2) Rellenar hasta el footer
+            elements.append(Spacer(1, 10))
+
+            # 3) Reset
             buffer_filas = []
-            altura_actual = 0
+
+            # 4) Salto de página
             elements.append(PageBreak())
+
+            # 5) Si toca encabezado en esta página:
             if not solo_primera:
                 agregar_encabezado()
                 agregar_info_cliente()
+                # ¡y volvemos a arrancar contando el alto del encabezado!
+                altura_actual = header_height
+            else:
+                # si sólo primera, en página 2 comienza directamente tras header+cliente
+                altura_actual = header_height
 
+        # siempre acumulamos la fila en el buffer
         buffer_filas.append([
             detalle["numero_linea"],
             parrafo,
@@ -677,12 +702,14 @@ def generar_pdf(factura):
         agregar_pie_pagina(canvas, doc, factura)
         agregar_autorretenedores(canvas, doc, factura)
 
-    on_later = paginas_siguientes if not solo_primera else paginas_basico
-
     pdf.build(
         elements,
         onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura),
-        onLaterPages=lambda canvas, doc: on_later(canvas, doc),
+        onLaterPages=lambda canvas, doc: (
+            paginas_basico(canvas, doc)
+            if solo_primera
+            else paginas_siguientes(canvas, doc, factura)
+        ),
         canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs)
     )
     buffer.seek(0)
