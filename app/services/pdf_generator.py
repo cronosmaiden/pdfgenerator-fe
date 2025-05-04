@@ -198,17 +198,36 @@ def generar_pdf(factura):
         == 1
     )
 
-    header_height_first = 180 if solo_primera else 180
-    header_height_later = 120   if solo_primera else 180
+    show_totales_last_only = factura.get("caracteristicas", {}) \
+        .get("totales", {}) \
+        .get("solo_ultima_pagina", 1) == 1
+    
+    totales_height = 105
+
+    if solo_primera and not show_totales_last_only:
+        header_height_first = 180
+        header_height_later  = 90
+    else:
+        header_height_first = 180 if solo_primera else 180
+        header_height_later  = 120   if solo_primera else 180
 
     page_height   = letter[1]
     top_margin    = pdf.topMargin
     bottom_margin = pdf.bottomMargin
     footer_height = 80
 
-    available_height_first = page_height - top_margin - bottom_margin - header_height_first - footer_height
-    available_height_later = page_height - top_margin - bottom_margin - header_height_later - footer_height
-        
+    base_available_first = page_height - top_margin - bottom_margin - header_height_first - footer_height
+    base_available_later  = page_height - top_margin - bottom_margin - header_height_later  - footer_height
+
+    if show_totales_last_only:
+        # si solo en última hoja, usamos el espacio completo en todas
+        available_height_first = base_available_first
+        available_height_later  = base_available_later
+    else:
+        # si en todas las hojas, restamos además el espacio de totales
+        available_height_first = base_available_first - totales_height
+        available_height_later  = base_available_later  - totales_height
+
     styles = getSampleStyleSheet()
     elements = []
 
@@ -671,6 +690,11 @@ def generar_pdf(factura):
                 elements.append(Spacer(1, espacio_restante))
 
             # 3) reset buffer y avanzar página
+            if not show_totales_last_only:
+                # primero vaciamos la tabla de detalle
+                agregar_totales()
+                agregar_sector_salud()
+            
             buffer_filas = []
             elements.append(PageBreak())
             page_number += 1
@@ -696,8 +720,9 @@ def generar_pdf(factura):
 
     # pintamos lo que quede antes de totales
     agregar_tabla_detalle(buffer_filas)
-    agregar_totales()
-    agregar_sector_salud()
+    if show_totales_last_only or not show_totales_last_only:
+        agregar_totales()
+        agregar_sector_salud()
     texto_obs = factura.get("otros", {}).get("informacion_adicional", "")
     if texto_obs and texto_obs.strip():
         agregar_obs_documento()
