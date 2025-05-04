@@ -189,6 +189,14 @@ def generar_pdf(factura):
         topMargin=28,  
         bottomMargin=28  
     )
+
+    solo_primera = (
+        factura
+        .get("caracteristicas", {})
+        .get("encabezado", {})
+        .get("solo_primera_pagina", 0)
+        == 1
+    )
     
     styles = getSampleStyleSheet()
     elements = []
@@ -640,8 +648,9 @@ def generar_pdf(factura):
             buffer_filas = []
             altura_actual = 0
             elements.append(PageBreak())
-            agregar_encabezado()
-            agregar_info_cliente()
+            if not solo_primera:
+                agregar_encabezado()
+                agregar_info_cliente()
 
         buffer_filas.append([
             detalle["numero_linea"],
@@ -663,9 +672,19 @@ def generar_pdf(factura):
     if texto_obs and texto_obs.strip():
         agregar_obs_documento()
         
-    pdf.build(elements, onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura), 
-              onLaterPages=lambda canvas, doc: paginas_siguientes(canvas, doc, factura),
-              canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs))
+    def paginas_basico(canvas, doc):
+        agregar_marca_agua(canvas, factura)
+        agregar_pie_pagina(canvas, doc, factura)
+        agregar_autorretenedores(canvas, doc, factura)
+
+    on_later = paginas_siguientes if not solo_primera else paginas_basico
+
+    pdf.build(
+        elements,
+        onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura),
+        onLaterPages=lambda canvas, doc: on_later(canvas, doc),
+        canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs)
+    )
     buffer.seek(0)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"
