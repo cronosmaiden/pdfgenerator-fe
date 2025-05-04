@@ -12,8 +12,6 @@ import os
 from app.services.qr_generator import generar_qr
 from reportlab.pdfgen import canvas as canvas_module
 from dotenv import load_dotenv
-from PIL import Image as PILImage, UnidentifiedImageError
-from reportlab.platypus import Flowable
 
 load_dotenv()
 
@@ -57,32 +55,6 @@ s3_client = boto3.client(
     "s3",
     region_name=S3_REGION
 )
-
-def get_qr_image_flowable(img_qr_data: str) -> Flowable:
-    try:
-        # Caso 1: Base64 con data:image/png;base64
-        if img_qr_data.startswith("data:image"):
-            header, b64data = img_qr_data.split(",", 1)
-            img_bytes = base64.b64decode(b64data)
-        else:
-            # Caso 2: Texto plano → Generar QR
-            qr_buffer = generar_qr(img_qr_data)
-            img_bytes = qr_buffer.getvalue()
-
-        # Verificar que es una imagen válida (con PIL)
-        with BytesIO(img_bytes) as bio:
-            try:
-                PILImage.open(bio).verify()
-            except UnidentifiedImageError as e:
-                print(f"⚠️ PIL no puede identificar la imagen: {e}")
-                return Spacer(1, 70)
-
-            bio.seek(0)
-            return Image(bio, width=70, height=70)
-
-    except Exception as e:
-        print(f"⚠️ Error al procesar imagen QR: {e}")
-        return Spacer(1, 70)  # Fallback
 
 def hex_to_rgb_color(hex_string: str) -> Color:
     hex_string = hex_string.lstrip("#")
@@ -279,7 +251,12 @@ def generar_pdf(factura):
             except Exception as e:
                 print(f"⚠️ Error al cargar logo_ofe: {e}")
 
-        qr_image = get_qr_image_flowable(factura['documento'].get('img_qr', ''))
+        qr_code = generar_qr(factura['documento']['img_qr'])
+        qr_path = "temp_qr.png"
+        with open(qr_path, "wb") as f:
+            f.write(qr_code.getbuffer())
+
+        qr_image = Image(qr_path, width=70, height=70)
 
         factura_info = Table([
             [Paragraph("<b>Factura electrónica de venta</b>", normal_color_style)],
@@ -291,7 +268,7 @@ def generar_pdf(factura):
         ]))
 
         header_row = Table([
-            [[logo_ofe_img] if logo_ofe_img else [Spacer(1, 1)], info_paragraphs, qr_image, factura_info]
+            [[logo_ofe_img] if logo_ofe_img else [""],info_paragraphs, qr_image, factura_info]
         ], colWidths=[140, 210, 100, 140])
 
         header_row.setStyle(TableStyle([
@@ -424,13 +401,13 @@ def generar_pdf(factura):
 
         for detalle in detalles:
             factura_detalles.append([
-                str(detalle["numero_linea"]),
+                detalle["numero_linea"],
                 Paragraph(detalle["descripcion"], descripcion_style),
-                str(detalle.get("unidad_de_cantidad", "")),
-                str(detalle["cantidad"]),
+                detalle["unidad_de_cantidad"],
+                detalle["cantidad"],
                 f"${float(detalle['valor_unitario']):,.2f}",
-                f"{detalle.get('impuestos_detalle', {}).get('porcentaje_impuesto', '0.00')}%",
-                f"${float(detalle.get('cargo_descuento', {}).get('valor_cargo_descuento', '0.00')):,.2f}",
+                f"{detalle['impuestos_detalle']['porcentaje_impuesto']}%",
+                f"${float(detalle['cargo_descuento']['valor_cargo_descuento']):,.2f}",
                 f"${float(detalle['valor_total_detalle']):,.2f}",
             ])
 
