@@ -508,7 +508,7 @@ def generar_pdf(factura):
         bg_color = hex_to_rgb_color(bg_hex)
 
         # — Generar QR —
-        qr_code = generar_qr(factura['documento']['img_qr'])
+        qr_code = generar_qr(factura['documento']['qr'])
         qr_path = "temp_qr.png"
         with open(qr_path, "wb") as f:
             f.write(qr_code.getbuffer())

@@ -289,7 +289,7 @@ def generar_pdf(factura):
             except Exception as e:
                 print(f"⚠️ Error al cargar logo_ofe: {e}")
 
-        qr_code = generar_qr(factura['documento']['img_qr'])
+        qr_code = generar_qr(factura['documento']['qr'])
         qr_path = "temp_qr.png"
         with open(qr_path, "wb") as f:
             f.write(qr_code.getbuffer())

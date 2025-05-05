@@ -41,7 +41,7 @@ class Documento(BaseModel):
     marca_agua: Optional[str] = ""
     cufe: str
     fecha_validacion_dian: str
-    img_qr: Optional[str] = ""
+    qr: Optional[str] = ""
     titulo_tipo_documento: str
     son: str
     notas_pie_pagina: str
