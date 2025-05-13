@@ -1,4 +1,6 @@
 from datetime import datetime
+from urllib.parse import urlparse
+from fastapi import HTTPException
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -643,6 +645,33 @@ def generar_pdf(factura):
         if not buffer_filas:
             return
 
+        # solo si pedimos encabezado solo en primera y estamos en página >1
+        if solo_primera and page_number > 1:
+            # estilo para el encabezado
+            header_style = ParagraphStyle(
+                name="HeaderDetalle",
+                parent=styles["Normal"],
+                fontName="Helvetica-Bold",
+                fontSize=8,
+                alignment=1  # centrar
+            )
+            encabezado_data = [[
+                Paragraph("Factura electrónica de venta", header_style),
+                Paragraph(factura["documento"]["identificacion"], header_style)
+            ]]
+            # ancho total de la tabla de detalle: 25+180+40+40+75+50+75+75 = 560
+            header_tbl = Table(encabezado_data, colWidths=[400, 160])
+            header_tbl.setStyle(TableStyle([
+                ("BOX",           (0, 0), (-1, -1), 1, colors.black),
+                ("BACKGROUND",    (0, 0), (-1, -1), colors.whitesmoke),
+                ("TEXTCOLOR",     (0, 0), (-1, -1), colors.black),
+                ("ALIGN",         (0, 0), (-1, -1), "CENTER"),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+                ("TOPPADDING",    (0, 0), (-1, -1), 4),
+            ]))
+            elements.append(header_tbl)
+            elements.append(Spacer(1, 6))
+
         tabla = Table(
             [["#", "Descripción", "U. Med", "Cantidad", "Valor Unitario", "% Imp.", "Descuento", "Total"]] + buffer_filas,
             colWidths=[25, 180, 40, 40, 75, 50, 75, 75]
@@ -746,18 +775,53 @@ def generar_pdf(factura):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"
 
-    # 🗓️ Obtener fecha actual
-    fecha_actual = datetime.now()
-    anio = str(fecha_actual.year)
-    mes = f"{fecha_actual.month:02d}"
-    dia = f"{fecha_actual.day:02d}"
+    ruta_doc = factura["documento"].get("ruta_documento")
+    if ruta_doc:
+        ruta_str = str(ruta_doc)
+        # 2) Quitamos el esquema (e.g. 'https://') si lo tuviera
+        if "://" in ruta_str:
+            _, after_scheme = ruta_str.split("://", 1)
+        else:
+            after_scheme = ruta_str
+        # 3) El primer segmento es el bucket, el resto es la key
+        partes = after_scheme.split("/", 1)
+        bucket_name = partes[0]
+        key = partes[1] if len(partes) > 1 else ""
+    else:
+        # Caída a comportamiento por defecto si no viene ruta_documento
+        bucket_name = S3_BUCKET_NAME
+        hoy = datetime.now()
+        key = (
+            f"{factura['receptor']['identificacion']}/"
+            f"{hoy.year}/{hoy.month:02d}/{hoy.day:02d}/"
+            f"{pdf_filename}"
+        )
 
-    # 📂 NIT de la empresa
-    nit = factura["receptor"]["identificacion"]
+    try:
+        # Subo y marco el objeto como público
+        s3_client.upload_fileobj(
+            buffer,
+            bucket_name,
+            key,
+            ExtraArgs={
+                "ContentType": "application/pdf",
+                "ContentDisposition": "inline"
+            }
+        )
 
-    # 🛣️ Ruta dentro del bucket
-    ruta_s3 = f"{nit}/{anio}/{mes}/{dia}/{pdf_filename}"
+        url_publica = f"https://{bucket_name}.s3.{S3_REGION}.amazonaws.com/{key}"
 
-    s3_client.upload_fileobj(buffer, S3_BUCKET_NAME, ruta_s3)
-
-    return f"{nit}/{anio}/{mes}/{dia}/{pdf_filename}"
+        return {
+            "s3_bucket": bucket_name,
+            "s3_key": key,
+            "url": url_publica,
+            "message": "PDF subido correctamente"
+        }
+    except Exception as e:
+        # Si algo falla, devuelvo detalle del error
+        return {
+            "error": "Error subiendo PDF a S3",
+            "bucket": bucket_name,
+            "key": key,
+            "exception": str(e)
+        }
