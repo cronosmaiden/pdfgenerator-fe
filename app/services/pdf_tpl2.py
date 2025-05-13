@@ -244,7 +244,7 @@ def generar_pdf(factura):
         razon_social_style = ParagraphStyle(
             name="RazonSocialTitle",
             fontName="Helvetica-Bold",
-            fontSize=16,
+            fontSize=14,
             alignment=1,
             textColor=color_texto_encabezado_rgb,
             spaceAfter=6
@@ -607,7 +607,7 @@ def generar_pdf(factura):
             name="ValorCUFE",
             parent=normal_style,
             fontName="Helvetica",
-            fontSize=7,
+            fontSize=8,
             leading=8,
             alignment=1
         )

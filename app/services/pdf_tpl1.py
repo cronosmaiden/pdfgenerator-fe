@@ -84,9 +84,11 @@ def agregar_marca_agua(canvas, factura):
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
     direccion_texto = (
-        f"Dir.: {factura['receptor']['direccion']} {factura['receptor']['ciudad']}, "
-        f"Tel.: {factura['receptor']['numero_movil']}, "
-        f"Email: {factura['receptor']['correo_electronico']}"
+        f"Dir.: {factura['emisor']['direccion']} {factura['emisor']['ciudad']}, "
+        f"Tel.: {factura['emisor']['num_celular']}, "
+        f"Email: {factura['emisor']['email']} | "
+        f"Web: {factura['emisor']['sitio_web']}"
+        
     )
     canvas.setFont("Helvetica", 7)
     page_width = letter[0]
@@ -117,7 +119,7 @@ def agregar_pie_pagina(canvas, doc, factura):
     canvas.saveState()
     
     # 📌 Texto del proveedor
-    proveedor_texto = "Proveedor Tecnológico: Teleinte SAS - NIT: 830.020.470-5 / Nombre del software: Afacturar.com www.afacturar.com"
+    proveedor_texto = factura['afacturar']['info_pt']
     
     page_width = letter[0]
     text_y = 30
@@ -162,7 +164,7 @@ def primera_pagina(canvas, doc, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(15, 600)  # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.translate(15, 500)  # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
@@ -176,7 +178,7 @@ def paginas_siguientes(canvas, doc, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(15, 600) # Posición: X desde borde izq., Y desde abajo (ajustable)
+    canvas.translate(15, 500) # Posición: X desde borde izq., Y desde abajo (ajustable)
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
@@ -296,12 +298,13 @@ def generar_pdf(factura):
         with open(qr_path, "wb") as f:
             f.write(qr_code.getbuffer())
 
-        qr_image = Image(qr_path, width=70, height=70)
+        qr_image = Image(qr_path, width=80, height=80)
 
         factura_info = Table([
-            [Paragraph("<b>Factura electrónica de venta</b>", normal_color_style)],
+            [Paragraph(f"<b>{factura['afacturar']['titulo_superior']}</b>", normal_color_style)],
+            [Paragraph(f"<b>{factura['documento']['titulo_tipo_documento']}</b>", normal_color_style)],
             [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", normal_color_style)]
-        ], colWidths=[120])
+        ], colWidths=[110])
         factura_info.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 1, colors.black),
             ("ALIGN", (0, 0), (-1, -1), "CENTER"),
@@ -348,7 +351,7 @@ def generar_pdf(factura):
         color_fondo_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")  # fallback: gris
         color_fondo_rgb = hex_to_rgb_color(color_fondo_hex)
 
-        titulo = Table([[Paragraph("Información del Cliente", negrita_titulos)]], colWidths=[560])
+        titulo = Table([[Paragraph("Información del Cliente o Adquirente ", negrita_titulos)]], colWidths=[560])
         titulo.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), color_fondo_rgb),
             ('TEXTCOLOR', (0, 0), (-1, -1), colors.whitesmoke),
@@ -474,6 +477,7 @@ def generar_pdf(factura):
 
             # **Tamaño de fuente y espaciado**
             ('FONTSIZE', (0, 0), (-1, -1), 7),
+            ('FONT',(0,0),(-1,1),'Times-Bold',10,12),
             ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
             ('TOPPADDING', (0, 0), (-1, -1), 2),
         ]))
@@ -486,54 +490,51 @@ def generar_pdf(factura):
         estilo_resolucion = ParagraphStyle(
             name="ResolucionTexto",
             fontName="Helvetica",
-            fontSize=5,  # **Reducido a tamaño 5**
-            leading=6,  # **Espaciado entre líneas más ajustado**
-            alignment=0,  # **Alineación izquierda**
+            fontSize=7,
+            leading=8,
+            alignment=0,
         )
 
-        # Texto de la autorización de la numeración de facturación con el nuevo estilo
-        texto_resolucion = Paragraph(
-            factura["otros"]["resolucion"], estilo_resolucion
-        )
+        # Párrafos con resolución y “son en letras”
+        texto_resolucion        = Paragraph(factura["otros"]["resolucion"], estilo_resolucion)
+        texto_son_valor_letras  = Paragraph(factura["documento"].get("son", ""), estilo_resolucion)
+
+        # Valores numéricos en Paragraphs
+        subt    = f"${float(factura['valores_totales']['valor_base']):,.2f}"
+        desc    = f"${float(factura['valores_totales']['valor_descuento_total']):,.2f}"
+        iva     = f"${float(factura['valores_totales']['valor_total_impuesto_1']):,.2f}"
+        antic   = f"${float(factura['valores_totales']['valor_anticipo']):,.2f}"
+        total   = f"${float(factura['valores_totales']['valor_total_a_pagar']):,.2f}"
 
         totales_data = [
-            [texto_resolucion, "Subtotal:", f"${float(factura['valores_totales']['valor_base']):,.2f}"],
-            ["", "Descuento:", f"${float(factura['valores_totales']['valor_descuento_total']):,.2f}"],
-            ["", "IVA:", f"${float(factura['valores_totales']['valor_total_impuesto_1']):,.2f}"],
-            ["", "Anticipo:", f"${float(factura['valores_totales']['valor_anticipo']):,.2f}"],
-            ["", "Total a Pagar:", f"${float(factura['valores_totales']['valor_total_a_pagar']):,.2f}"]
+            [texto_resolucion,       "Subtotal:",        subt],
+            ["",                     "Descuento:",       desc],
+            [texto_son_valor_letras,                     "IVA:",             iva],
+            ["", "Anticipo:",        antic],
+            ["",                     "Total a Pagar:",   total],
         ]
 
-        # **Ajuste de anchos para mantener el total alineado**
-        totales_table = Table(totales_data, colWidths=[280, 140, 140])  
+        # **Ajuste de anchos de columna**
+        totales_table = Table(totales_data, colWidths=[420, 70, 70])
 
         totales_table.setStyle(TableStyle([
-            # **Borde negro exterior de la tabla**
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
-
-            # **Bordes internos blancos**
-            ('GRID', (0, 0), (-1, -1), 1, colors.white),  
-
-            # **Texto alineado a la derecha en la columna de valores**
-            ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
-
-            # **Texto de la resolución: Centrado verticalmente y más pequeño**
-            ('ALIGN', (0, 0), (0, -1), 'LEFT'),
-
-            ('SPAN', (0, 0), (0, -1)),
-
-            ('VALIGN', (0, 0), (0, -1), 'MIDDLE'),  # **Centrado verticalmente**
-            
-            # **Texto negro en todas las celdas**
-            ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
-
-            # **Fondo blanco en todas las celdas**
-            ('BACKGROUND', (0, 0), (-1, -1), colors.white),
-
-            # **Eliminar padding extra para compactar la tabla**
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 1),  # **Aún más compacto**
-            ('TOPPADDING', (0, 0), (-1, -1), 1),  # **Reduce espacio**
-            ('FONTSIZE', (0, 0), (-1, -1), 7),  
+            # Borde exterior negro
+            ('BOX',            (0, 0), (-1, -1), 1.5, colors.black),
+            # Líneas internas blancas (invisibles)
+            ('GRID',           (0, 0), (-1, -1), 1,   colors.white),
+            # Alinear etiquetas (col 1) y valores (col 2) a la derecha
+            ('ALIGN',          (1, 0), (-1, -1), 'RIGHT'),
+            # Alinear columna 0 (resolución y son) a la izquierda
+            ('ALIGN',          (0, 0), (0, -1),    'LEFT'),
+            # Alineación vertical arriba en toda la tabla
+            ('VALIGN',         (0, 0), (-1, -1), 'TOP'),
+            # Texto y fondo blanco en todas las celdas
+            ('TEXTCOLOR',      (0, 0), (-1, -1), colors.black),
+            ('BACKGROUND',     (0, 0), (-1, -1), colors.white),
+            # Padding compacto y tamaño de fuente
+            ('BOTTOMPADDING',  (0, 0), (-1, -1), 1),
+            ('TOPPADDING',     (0, 0), (-1, -1), 1),
+            ('FONTSIZE',       (0, 0), (-1, -1), 7),
         ]))
 
         elements.append(totales_table)
@@ -656,7 +657,7 @@ def generar_pdf(factura):
                 alignment=1  # centrar
             )
             encabezado_data = [[
-                Paragraph("Factura electrónica de venta", header_style),
+                Paragraph(factura["documento"]["titulo_tipo_documento"], header_style),
                 Paragraph(factura["documento"]["identificacion"], header_style)
             ]]
             # ancho total de la tabla de detalle: 25+180+40+40+75+50+75+75 = 560
@@ -665,7 +666,7 @@ def generar_pdf(factura):
                 ("BOX",           (0, 0), (-1, -1), 1, colors.black),
                 ("BACKGROUND",    (0, 0), (-1, -1), colors.whitesmoke),
                 ("TEXTCOLOR",     (0, 0), (-1, -1), colors.black),
-                ("ALIGN",         (0, 0), (-1, -1), "CENTER"),
+                ("ALIGN",         (0, 0), (-1, -1), "LEFT"),
                 ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
                 ("TOPPADDING",    (0, 0), (-1, -1), 4),
             ]))
@@ -773,6 +774,7 @@ def generar_pdf(factura):
     )
     buffer.seek(0)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"
 
     ruta_doc = factura["documento"].get("ruta_documento")
@@ -814,8 +816,8 @@ def generar_pdf(factura):
         return {
             "s3_bucket": bucket_name,
             "s3_key": key,
-            "url": url_publica,
-            "message": "PDF subido correctamente"
+            "url": ruta_doc,
+            "message": "PDF subido correctamente a S3"
         }
     except Exception as e:
         # Si algo falla, devuelvo detalle del error
