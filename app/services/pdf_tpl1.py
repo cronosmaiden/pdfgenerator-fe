@@ -294,11 +294,8 @@ def generar_pdf(factura):
                 print(f"⚠️ Error al cargar logo_ofe: {e}")
 
         qr_code = generar_qr(factura['documento']['qr'])
-        qr_path = "temp_qr.png"
-        with open(qr_path, "wb") as f:
-            f.write(qr_code.getbuffer())
-
-        qr_image = Image(qr_path, width=80, height=80)
+        qr_buffer = BytesIO(qr_code.getvalue())
+        qr_image  = Image(qr_buffer, width=80, height=80)
 
         factura_info = Table([
             [Paragraph(f"<b>{factura['afacturar']['titulo_superior']}</b>", normal_color_style)],
