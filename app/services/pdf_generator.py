@@ -16,3 +16,4 @@ def generar_pdf(factura):
         return generar_pdf_tpl2(factura)
     else:
         raise ValueError(f"Plantilla desconocida: {plantilla}. Solo se admite 1 o 2.")
+    

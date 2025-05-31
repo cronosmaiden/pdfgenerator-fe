@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl, condecimal, AnyHttpUrl
+from pydantic import BaseModel, HttpUrl, condecimal, AnyHttpUrl, BaseModel, AnyUrl, Field, field_validator
 from sqlalchemy import Column, Integer, String
 from app.database import Base
 from typing import List, Optional, Any
@@ -45,7 +45,18 @@ class Documento(BaseModel):
     titulo_tipo_documento: str
     son: str
     notas_pie_pagina: str
-    ruta_documento: HttpUrl
+    ruta_documento: Optional[AnyUrl] = Field(
+        None,
+        description="URL del PDF existente; si viene vacía o ausente, se generará automáticamente"
+    )
+
+    @field_validator("ruta_documento", mode="before")
+    @classmethod
+    def empty_str_to_none(cls, v):
+        # Si recibimos "" (o solo espacios), lo convertimos a None
+        if isinstance(v, str) and not v.strip():
+            return None
+        return v
 
 class EncabezadoCaracteristicas(BaseModel):
     solo_primera_pagina: int

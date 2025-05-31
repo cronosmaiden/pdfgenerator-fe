@@ -30,11 +30,11 @@
 		"marca_agua": "",
 		"cufe": "1518402d50434170ac308a2cafd7f52ac8cf1f67135bc739f7d848452cdcdf77d56664dc8b0cf7161aea2998ce158891",
 		"fecha_validacion_dian": "2025-04-14 15:15:08",
-		"qr": "NumFac:CED57157 \n FecFac:2025-02-26 \n HorFac:15:25:25 \n NitFac:800231602 \n DocAdq:830103525 \n ValFac:111724500.00 \n ValIva:0.00 \n ValOtroIm:0.00 \n ValTolFac:111724500.00 \n CUFE:ce81aed7a299bf74aede1c8f8b0416bda4ce60593975266e22ff115bc5e26fdee1ca2a9045ed619516d5278191923409 \n QRCode:https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey=ce81aed7a299bf74aede1c8f8b0416bda4ce60593975266e22ff115bc5e26fdee1ca2a9045ed619516d5278191923409",
+		"img_qr": "NumFac:CED57157 \n FecFac:2025-02-26 \n HorFac:15:25:25 \n NitFac:800231602 \n DocAdq:830103525 \n ValFac:111724500.00 \n ValIva:0.00 \n ValOtroIm:0.00 \n ValTolFac:111724500.00 \n CUFE:ce81aed7a299bf74aede1c8f8b0416bda4ce60593975266e22ff115bc5e26fdee1ca2a9045ed619516d5278191923409 \n QRCode:https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey=ce81aed7a299bf74aede1c8f8b0416bda4ce60593975266e22ff115bc5e26fdee1ca2a9045ed619516d5278191923409",
 		"titulo_tipo_documento": "Factura electrónica de venta",
 		"son": "Ciento cuatro mil millones de pesos",
 		"notas_pie_pagina": "Autorretenedores según resolución DIAN 009796 del 14 de Septiembre del 2011. Gran contribuyente de la Dirección de Impuestos de Bogotá Resolución DDI-032117 de Octubre 25 de 2019",
-		"ruta_documento": "https://pdf-afacturar/310c4707/tmp/2025/05/14/175327.pdf"
+		"ruta_documento": ""
 	},
 	"caracteristicas": {
 		"encabezado": {
@@ -42,7 +42,7 @@
 			"Color_texto": "#47c720"
 		},
 		"totales": {
-			"solo_ultima_pagina": 0
+			"solo_ultima_pagina": 1
 		},
 		"pie_de_pagina": {
 			"solo_primera_pagina": "#47c720",
@@ -113,7 +113,7 @@
 				"valor_impuesto": "0.00"
 			}
 		},
-		{
+        {
 			"numero_linea": 2,
 			"cantidad": 1,
 			"unidad_de_cantidad": "94",
@@ -163,7 +163,7 @@
 				"valor_impuesto": "0.00"
 			}
 		},
-		{
+        {
 			"numero_linea": 3,
 			"cantidad": 1,
 			"unidad_de_cantidad": "94",
@@ -213,8 +213,5808 @@
 				"valor_impuesto": "0.00"
 			}
 		},
-		{
+        {
 			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 1,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 2,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 3,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 4,
+			"cantidad": 1,
+			"unidad_de_cantidad": "94",
+			"nombre_unidad_medida": "unidad",
+			"valor_unitario": "41000000.00",
+			"descripcion": "~|~~|~Servicio de Odontología ~|~",
+			"nota_detalle": "",
+			"regalo": {
+				"es_regalo": false,
+				"cod_precio_referencia": 0,
+				"precio_referencia": "0.00"
+			},
+			"cargo_descuento": {
+				"es_descuento": false,
+				"porcentaje_cargo_descuento": "0.00",
+				"valor_base_cargo_descuento": "0.00",
+				"valor_cargo_descuento": "0.00"
+			},
+			"marca": "",
+			"modelo": "",
+			"retenciones_detalle": [
+				{
+					"codigo": 0,
+					"porcentaje": "0.00",
+					"valor_base": "0.00",
+					"valor_retenido": "0.00"
+				}
+			],
+			"valores_unitarios": {
+				"valor_descuento": "0.00",
+				"valor_con_descuento": "41000000.00",
+				"valor_impuesto_1": "0.00",
+				"valor_impuesto_2": "0.00",
+				"valor_impuesto_3": "0.00",
+				"valor_impuesto_4": "0.00",
+				"valor_reteiva": "0.00",
+				"valor_retefuente": "0.00",
+				"valor_reteica": "0.00",
+				"valor_a_pagar": "0.00"
+			},
+			"valor_total_detalle_con_cargo_descuento": "41000000.00",
+			"valor_total_detalle": "41000000.00",
+			"impuestos_detalle": {
+				"codigo_impuesto": 0,
+				"porcentaje_impuesto": "0.00",
+				"valor_base_impuesto": "0.00",
+				"valor_impuesto": "0.00"
+			}
+		},
+        {
+			"numero_linea": 5,
 			"cantidad": 1,
 			"unidad_de_cantidad": "94",
 			"nombre_unidad_medida": "unidad",
@@ -299,7 +6099,7 @@
 	},
 	"afacturar": {
 		"titulo_superior": "Representación gráfica del documento electrónico",
-		"logo": "",
-		"info_pt": "Proveedor tecnologico: Teleinte SAS NIT 830.020.470-5 / Nombre del software:  Afacturar.com"
+		"logo": "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",
+        "info_pt": "Proveedor Tecnológico Autorizado: Teleinte SAS NIT 830.020.470-5 / Nombre del software:  Afacturar.com ©"
 	}
 }

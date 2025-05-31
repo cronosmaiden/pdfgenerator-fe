@@ -7,6 +7,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.colors import Color
 from io import BytesIO
+from starlette.concurrency import run_in_threadpool
 from reportlab.lib.utils import ImageReader
 import boto3
 import base64
@@ -16,39 +17,6 @@ from reportlab.pdfgen import canvas as canvas_module
 from dotenv import load_dotenv
 
 load_dotenv()
-
-class NumberedCanvas(canvas_module.Canvas):
-    def __init__(self, *args, factura=None, **kwargs):
-        super(NumberedCanvas, self).__init__(*args, **kwargs)
-        self.factura = factura
-        self._saved_page_states = []
-
-    def showPage(self):
-        self._saved_page_states.append(dict(self.__dict__))  # Guarda el estado
-        self._startPage()  # Prepara una nueva página sin dibujar aún
-
-    def save(self):
-        total_pages = len(self._saved_page_states)
-
-        for state in self._saved_page_states:
-            self.__dict__.update(state)
-            self.draw_page_number(total_pages)
-            super(NumberedCanvas, self).showPage()
-
-        super(NumberedCanvas, self).save()
-
-    def draw_page_number(self, total_pages):
-        page_width = letter[0]
-        text_y = 30
-
-        color_hex = self.factura.get("caracteristicas", {}).get("pie_de_pagina", {}).get("Color_texto", "#000000")
-        color_rgb = hex_to_rgb_color(color_hex)
-
-        self.setFont("Helvetica", 6)
-        self.setFillColor(color_rgb)
-
-        page_num_text = f"Página {self._pageNumber} de {total_pages}"
-        self.drawRightString(page_width - 28, text_y, page_num_text)
 
 S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 S3_REGION = os.getenv("S3_REGION")
@@ -79,7 +47,7 @@ def agregar_marca_agua(canvas, factura):
     canvas.drawCentredString(0, 0, texto_marca.upper())
 
     canvas.restoreState()
-
+    
 # **Función para la dirección de contacto**
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
@@ -182,6 +150,41 @@ def paginas_siguientes(canvas, doc, factura):
     canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
+
+class NumberedCanvas(canvas_module.Canvas):
+    def __init__(self, *args, factura=None, **kwargs):
+        super(NumberedCanvas, self).__init__(*args, **kwargs)
+        self.factura = factura
+        self._saved_page_states = []
+
+    def showPage(self):
+        self._saved_page_states.append(dict(self.__dict__))  # Guarda el estado
+        self._startPage()  # Prepara una nueva página sin dibujar aún
+
+    def save(self):
+        total_pages = len(self._saved_page_states)
+
+        for state in self._saved_page_states:
+            self.__dict__.update(state)
+            self.draw_page_number(total_pages)
+            super(NumberedCanvas, self).showPage()
+
+        super(NumberedCanvas, self).save()
+
+    def draw_page_number(self, total_pages):
+        page_width = letter[0]
+        text_y = 30
+
+        color_hex = self.factura.get("caracteristicas", {}).get("pie_de_pagina", {}).get("Color_texto", "#000000")
+        color_rgb = hex_to_rgb_color(color_hex)
+
+        self.setFont("Helvetica", 6)
+        self.setFillColor(color_rgb)
+
+        page_num_text = f"Página {self._pageNumber} de {total_pages}"
+        self.drawRightString(page_width - 28, text_y, page_num_text)
+
+
 
 def generar_pdf(factura):
     buffer = BytesIO()
@@ -761,66 +764,63 @@ def generar_pdf(factura):
 
     pdf.build(
         elements,
-        onFirstPage=lambda canvas, doc: primera_pagina(canvas, doc, factura),
-        onLaterPages=lambda canvas, doc: (
-            paginas_basico(canvas, doc)
+        onFirstPage=lambda c, d: primera_pagina(c, d, factura),
+        onLaterPages=lambda c, d: (
+            paginas_basico(c, d)
             if solo_primera
-            else paginas_siguientes(canvas, doc, factura)
+            else paginas_siguientes(c, d, factura)
         ),
-        canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs)
+        canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs),
     )
-    buffer.seek(0)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    pdf_filename = f"cufe_{factura['documento']['cufe']}_{timestamp}.pdf"
+    buffer.seek(0)
+    pdf_bytes = buffer.getvalue()
+    hoy = datetime.now()
+    pdf_filename = f"cufe_{factura['documento']['cufe']}_{hoy.strftime('%Y%m%d_%H%M%S_%f')[:-3]}.pdf"
 
     ruta_doc = factura["documento"].get("ruta_documento")
     if ruta_doc:
-        ruta_str = str(ruta_doc)
-        # 2) Quitamos el esquema (e.g. 'https://') si lo tuviera
-        if "://" in ruta_str:
-            _, after_scheme = ruta_str.split("://", 1)
-        else:
-            after_scheme = ruta_str
-        # 3) El primer segmento es el bucket, el resto es la key
-        partes = after_scheme.split("/", 1)
-        bucket_name = partes[0]
-        key = partes[1] if len(partes) > 1 else ""
+        parsed = urlparse(str(ruta_doc))
+        bucket_name = parsed.netloc
+        key         = parsed.path.lstrip("/")
     else:
-        # Caída a comportamiento por defecto si no viene ruta_documento
         bucket_name = S3_BUCKET_NAME
-        hoy = datetime.now()
         key = (
             f"{factura['receptor']['identificacion']}/"
             f"{hoy.year}/{hoy.month:02d}/{hoy.day:02d}/"
             f"{pdf_filename}"
         )
 
+    return {
+        "pdf_bytes": pdf_bytes,
+        "bucket": bucket_name,
+        "key": key,
+        "filename": pdf_filename,
+    }
+    
+def _sync_upload(pdf_bytes: bytes, bucket: str, key: str):
+    print(f"[sync_upload] subiendo {len(pdf_bytes)} bytes a s3://{bucket}/{key}")
     try:
-        # Subo y marco el objeto como público
+        buf = BytesIO(pdf_bytes)
         s3_client.upload_fileobj(
-            buffer,
-            bucket_name,
+            buf,
+            bucket,
             key,
             ExtraArgs={
                 "ContentType": "application/pdf",
-                "ContentDisposition": "inline"
-            }
+                "ContentDisposition": "inline",
+            },
         )
-
-        url_publica = f"https://{bucket_name}.s3.{S3_REGION}.amazonaws.com/{key}"
-
-        return {
-            "s3_bucket": bucket_name,
-            "s3_key": key,
-            "url": ruta_doc,
-            "message": "PDF subido correctamente a S3"
-        }
+        print(f"[sync_upload] ¡Subida completada! s3://{bucket}/{key}")
     except Exception as e:
-        # Si algo falla, devuelvo detalle del error
-        return {
-            "error": "Error subiendo PDF a S3",
-            "bucket": bucket_name,
-            "key": key,
-            "exception": str(e)
-        }
+        print(f"[sync_upload] ERROR al subir: {e}")
+        raise
+
+async def upload_pdf_to_s3(pdf_bytes: bytes, bucket: str, key: str):
+    """
+    Versión async de upload_pdf_to_s3: delega el trabajo pesado
+    al thread-pool internamente, liberando el event-loop.
+    """
+    print(f"[upload_pdf_to_s3] llamada recibida para {bucket}/{key}")
+    await run_in_threadpool(_sync_upload, pdf_bytes, bucket, key)
+    print(f"[upload_pdf_to_s3] función async finalizada para {bucket}/{key}")
