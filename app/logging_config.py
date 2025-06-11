@@ -15,14 +15,19 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 # Configurar el logger principal para capturar todo (nivel DEBUG)
 logging.basicConfig(
-    level=logging.DEBUG,  # Asegura que capturamos TODAS las peticiones
+    level=logging.DEBUG,  # Capturamos todas las peticiones, pero luego limitaremos pdfminer
     format=LOG_FORMAT,
     datefmt=DATE_FORMAT,
     handlers=[
-        RotatingFileHandler(LOG_FILE, maxBytes=5 * 1024 * 1024, backupCount=3),  # Máximo 5MB por archivo, 3 copias
-        logging.StreamHandler()  # También mostrar logs en la consola
+        RotatingFileHandler(LOG_FILE, maxBytes=5 * 1024 * 1024, backupCount=3),
+        logging.StreamHandler()
     ]
 )
 
 # Crear el logger de la aplicación
 logger = logging.getLogger("fastapi_app")
+
+# ─── Aquí bajamos el nivel de pdfminer para que sólo muestre WARNING/ERROR ───
+logging.getLogger("pdfminer").setLevel(logging.WARNING)
+logging.getLogger("pdfminer.pdfinterp").setLevel(logging.WARNING)
+logging.getLogger("pdfminer.psparser").setLevel(logging.WARNING)

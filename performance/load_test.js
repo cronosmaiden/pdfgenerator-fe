@@ -3,7 +3,7 @@ import { check } from 'k6';
 
 // --- CONFIGURA AQUI ---
 const URL   = 'http://localhost:8000/generar_pdf/';
-const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyYWxib3Jub3oiLCJleHAiOjE3NDc3OTMyNjN9.kLmdtDYYoGNFCVDJMo--6O1CPIy18geXtQ0oFFKAfWM';
+const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyYWxib3Jub3oiLCJleHAiOjE3NDkwMDgxODl9.zT4-svMjhwQthDL6GJokFfXxms7CU9U-bLsN-AyGhO0';
 
 // Carga el payload JSON desde el fichero
 const payload = JSON.parse(open('payload.json', 'utf8'));

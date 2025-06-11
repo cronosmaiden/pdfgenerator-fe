@@ -123,6 +123,17 @@ def agregar_pie_pagina(canvas, doc, factura):
 
 # **Funciones para manejar encabezado y pie de página correctamente**
 def primera_pagina(canvas, doc, factura):
+    
+    # ——— Texto arriba-derecha ———
+    canvas.saveState()
+    canvas.setFont("Helvetica", 6)  # tamaño pequeño
+    page_width, page_height = letter
+    x = page_width - 28            # tu margen derecho
+    y = page_height - 10           # 10pt por debajo del borde superior
+    canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
+    canvas.restoreState()
+    # ————————————————————
+
     agregar_marca_agua(canvas, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
@@ -138,6 +149,17 @@ def primera_pagina(canvas, doc, factura):
     canvas.restoreState()
 
 def paginas_siguientes(canvas, doc, factura):
+    
+    # ——— Texto arriba-derecha ———
+    canvas.saveState()
+    canvas.setFont("Helvetica", 6)  # tamaño pequeño
+    page_width, page_height = letter
+    x = page_width - 28            # tu margen derecho
+    y = page_height - 10           # 10pt por debajo del borde superior
+    canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
+    canvas.restoreState()
+    # ————————————————————
+    
     agregar_marca_agua(canvas, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
@@ -251,7 +273,7 @@ def generar_pdf(factura):
         razon_social_style = ParagraphStyle(
             name="RazonSocialTitle",
             fontName="Helvetica-Bold",
-            fontSize=16,
+            fontSize=12,
             alignment=1,
             textColor=color_texto_encabezado_rgb,
             spaceAfter=6
@@ -262,7 +284,15 @@ def generar_pdf(factura):
             parent=styles["Normal"],
             fontName="Helvetica-Bold",
             fontSize=7,
-            textColor=color_texto_encabezado_rgb  # 👈 Nuevo
+            textColor=color_texto_encabezado_rgb
+        )
+        centered_bold_7 = ParagraphStyle(
+            name="CenteredBold7",
+            parent=styles["Normal"],
+            fontName="Helvetica-Bold",
+            fontSize=7,
+            textColor=color_texto_encabezado_rgb,
+            alignment=1  # center
         )
 
         header_data = [
@@ -301,9 +331,8 @@ def generar_pdf(factura):
         qr_image  = Image(qr_buffer, width=80, height=80)
 
         factura_info = Table([
-            [Paragraph(f"<b>{factura['afacturar']['titulo_superior']}</b>", normal_color_style)],
-            [Paragraph(f"<b>{factura['documento']['titulo_tipo_documento']}</b>", normal_color_style)],
-            [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", normal_color_style)]
+            [Paragraph(f"<b>{factura['documento']['titulo_tipo_documento']}</b>", centered_bold_7)],
+            [Paragraph(f"<b>{factura['documento']['identificacion']}</b>", centered_bold_7)]
         ], colWidths=[110])
         factura_info.setStyle(TableStyle([
             ("GRID", (0, 0), (-1, -1), 1, colors.black),
@@ -325,103 +354,111 @@ def generar_pdf(factura):
     # **Información del Cliente**
     def agregar_info_cliente():
         styles = getSampleStyleSheet()
-        normal_style = styles["Normal"]
+        normal = styles["Normal"]
 
-        # Nuevo estilo negrita con tamaño 7
-        negrita_7 = ParagraphStyle(
-            name="Negrita7",
-            parent=normal_style,
+        # estilo para las "etiquetas" (Nombre:, Correo:, etc.) — fuente normal
+        label_style = ParagraphStyle(
+            name="LabelStyle",
+            parent=normal,
+            fontName="Helvetica",
+            fontSize=7,
+            leading=8,
+            textColor=colors.black,
+        )
+
+        # estilo para los "valores" — negrita
+        value_style = ParagraphStyle(
+            name="ValueStyle",
+            parent=normal,
             fontName="Helvetica-Bold",
             fontSize=7,
-            spaceAfter=0,
-            textColor=colors.gray
-            
+            leading=8,
+            textColor=colors.black,
         )
 
         negrita_titulos = ParagraphStyle(
             name="Negrita7",
-            parent=normal_style,
+            parent=normal,
             fontName="Helvetica-Bold",
-            fontSize=8,
+            fontSize=7,
+            spaceBefore=1,
+            spaceAfter=1,
             textColor=colors.whitesmoke
         )
 
-        
-        # Título principal
-        color_fondo_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")  # fallback: gris
+        # Título de sección
+        color_fondo_hex = factura.get("caracteristicas", {}).get("color_fondo", "#808080")
         color_fondo_rgb = hex_to_rgb_color(color_fondo_hex)
 
-        titulo = Table([[Paragraph("Información del Cliente o Adquirente ", negrita_titulos)]], colWidths=[560])
+        titulo = Table([[Paragraph("Información del Cliente o Adquirente", negrita_titulos)]], colWidths=[560])
         titulo.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, -1), color_fondo_rgb),
-            ('TEXTCOLOR', (0, 0), (-1, -1), colors.whitesmoke),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
-            ('FONTSIZE', (0, 0), (-1, -1), 7),
-            ('TOPPADDING', (0, 0), (-1, -1), 1),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 1),
+            ("BACKGROUND",   (0, 0), (-1, -1), color_fondo_rgb),
+            ("TEXTCOLOR",    (0, 0), (-1, -1), colors.whitesmoke),
+            ("ALIGN",        (0, 0), (-1, -1), "CENTER"),
+            ("BOX",          (0, 0), (-1, -1), 1, colors.black),
+            ("FONTSIZE",     (0, 0), (-1, -1), 7),
+            ("TOPPADDING",   (0, 0), (-1, -1), 0),
+            ("BOTTOMPADDING",(0, 0), (-1, -1), 0),
         ]))
         elements.append(titulo)
 
-        def estilo_subtabla():
-            return TableStyle([
-                ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
-                ('LINEABOVE', (0, 0), (-1, 0), 0.5, colors.black),
-                ('LINEBELOW', (0, -1), (-1, -1), 0.5, colors.black),
-                ('LINEBEFORE', (0, 0), (0, -1), 0.5, colors.black),
-                ('LINEAFTER', (-1, 0), (-1, -1), 0.5, colors.black),
-                ('FONTSIZE', (0, 0), (-1, -1), 7),
-                ('TOPPADDING', (0, 0), (-1, -1), 0.5),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5),
-            ])
+        # estilo común de bordes y espaciado
+        common_table_style = TableStyle([
+            ("VALIGN",      (0, 0), (-1, -1), "MIDDLE"),
+            ("BOX",         (0, 0), (-1, -1), 1, colors.black),
+            ("LINEABOVE",   (0, 0), (-1, 0), 0.5, colors.black),
+            ("LINEBELOW",   (0, -1),(-1, -1),0.5, colors.black),
+            ("LINEBEFORE",  (0, 0), (0, -1), 0.5, colors.black),
+            ("LINEAFTER",   (-1, 0),(-1, -1),0.5, colors.black),
+            ("FONTSIZE",    (0, 0), (-1, -1), 7),
+            ("TOPPADDING",  (0, 0), (-1, -1), 0),
+            ("BOTTOMPADDING",(0, 0), (-1, -1), 0),
+        ])
 
-        # Sección 1
+        # Sección 1: Nombre y Correo en filas independientes
         seccion_1 = Table([
-            [Paragraph("Nombre:", negrita_7), factura["receptor"]["nombre"],
-            Paragraph("Correo Electrónico:", negrita_7), factura["receptor"]["correo_electronico"]],
-            [Paragraph("NIT:", negrita_7), factura["receptor"]["identificacion"],
-            Paragraph("Teléfono:", negrita_7), factura["receptor"]["numero_movil"]],
-            [Paragraph("Dirección:", negrita_7), factura["receptor"]["direccion"],
-            Paragraph("Ciudad:", negrita_7), factura["receptor"]["ciudad"]],
-            [Paragraph("Departamento:", negrita_7), factura["receptor"]["departamento"],
-            Paragraph("País:", negrita_7), factura["receptor"]["pais"]],
-        ], colWidths=[70, 210, 100, 180])
-        seccion_1.setStyle(estilo_subtabla())
+            [Paragraph("Nombre:",        label_style), factura["receptor"]["nombre"],              "", ""],
+            [Paragraph("Correo Electrónico:", label_style), factura["receptor"]["correo_electronico"], "", ""],
+            [Paragraph("NIT:",           label_style), factura["receptor"]["identificacion"],     Paragraph("Teléfono:", label_style), factura["receptor"]["numero_movil"]],
+            [Paragraph("Dirección:",     label_style), factura["receptor"]["direccion"],          Paragraph("Ciudad:",    label_style), factura["receptor"]["ciudad"]],
+            [Paragraph("Departamento:",  label_style), factura["receptor"]["departamento"],       Paragraph("País:",      label_style), factura["receptor"]["pais"]],
+        ], colWidths=[100, 180, 100, 180])
+        # convertimos los valores a Paragraph con estilo bold
+        for row in seccion_1._cellvalues:
+            # celdas índice 1 y 3 (si existen) son valores
+            for idx in (1, 3):
+                if isinstance(row[idx], str):
+                    row[idx] = Paragraph(row[idx], value_style)
+        seccion_1.setStyle(common_table_style)
         elements.append(seccion_1)
 
-        # Sección 2
+        # Sección 2: Datos de pago
         seccion_2 = Table([
-            [Paragraph("Moneda:", negrita_7), factura["documento"]["moneda"],
-            Paragraph("Método de pago:", negrita_7), factura["documento"]["metodo_de_pago"]],
-            [Paragraph("Tipo de pago:", negrita_7), factura["documento"]["tipo_de_pago"],
-            Paragraph("Condición de pago:", negrita_7), factura["documento"]["condicion_de_pago"]],
-            [Paragraph("Orden de Compra:", negrita_7), factura["documento"]["numero_orden"], "", ""]
+            [Paragraph("Moneda:",       label_style), Paragraph(factura["documento"]["moneda"], value_style),
+            Paragraph("Método de pago:",label_style), Paragraph(factura["documento"]["metodo_de_pago"], value_style)],
+            [Paragraph("Tipo de pago:", label_style), Paragraph(factura["documento"]["tipo_de_pago"], value_style),
+            Paragraph("Orden de Compra:", label_style), Paragraph(factura["documento"]["numero_orden"], value_style)],
         ], colWidths=[100, 180, 100, 180])
-        seccion_2.setStyle(estilo_subtabla())
+        seccion_2.setStyle(common_table_style)
         elements.append(seccion_2)
 
-        # Sección 3
+        # Sección 3: Fechas
         seccion_3 = Table([
-            [Paragraph("Fecha y Hora de expedición:", negrita_7), f"{factura['documento']['fecha']} {factura['documento']['hora']}",
-            Paragraph("Fecha de Vencimiento:", negrita_7), factura["documento"]["fecha_vencimiento"]],
+            [Paragraph("Fecha y Hora de expedición:", label_style),
+            Paragraph(f"{factura['documento']['fecha']} {factura['documento']['hora']}", value_style),
+            Paragraph("Fecha de Vencimiento:", label_style),
+            Paragraph(factura["documento"]["fecha_vencimiento"], value_style)],
         ], colWidths=[120, 200, 120, 120])
-        seccion_3.setStyle(estilo_subtabla())
+        seccion_3.setStyle(common_table_style)
         elements.append(seccion_3)
 
-        # Sección 4
+        # Sección 4: CUFE
         seccion_4 = Table([
-            [Paragraph("CUFE:", negrita_7), factura["documento"]["cufe"]]
+            [Paragraph("CUFE:", label_style), Paragraph(factura["documento"]["cufe"], value_style)]
         ], colWidths=[60, 500])
-        seccion_4.setStyle(TableStyle([
-            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ('BOX', (0, 0), (-1, -1), 0.5, colors.black),
-            ('LINEABOVE', (0, 0), (-1, 0), 0.5, colors.black),
-            ('LINEBELOW', (0, 0), (-1, 0), 0.5, colors.black),
-            ('LINEBEFORE', (0, 0), (0, 0), 0.5, colors.black),
-            ('LINEAFTER', (-1, 0), (-1, 0), 0.5, colors.black),
-            ('FONTSIZE', (0, 0), (-1, -1), 7),
-        ]))
+        seccion_4.setStyle(common_table_style)
         elements.append(seccion_4)
+
         elements.append(Spacer(1, 8))
 
 
@@ -469,7 +506,7 @@ def generar_pdf(factura):
             ('LINEBELOW', (0, 0), (-1, -1), 1, colors.white),  # Líneas blancas abajo
 
             # **Borde exterior negro grueso**
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('BOX', (0, 0), (-1, -1), 1, colors.black),
 
             # **Alinear contenido**
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -486,94 +523,137 @@ def generar_pdf(factura):
 
     # **Subtotal, Descuento, IVA y Total**
     def agregar_totales():
-        # **Definir un nuevo estilo de párrafo más pequeño**
+        styles = getSampleStyleSheet()
+
+        # Reducimos el leading para apretar filas
         estilo_resolucion = ParagraphStyle(
             name="ResolucionTexto",
+            parent=styles["Normal"],
             fontName="Helvetica",
             fontSize=7,
-            leading=8,
+            leading=6,     
             alignment=0,
         )
+        label_style = ParagraphStyle(
+            name="Label7",
+            parent=styles["Normal"],
+            fontName="Helvetica",
+            fontSize=7,
+            leading=6,      
+            textColor=colors.black,
+            alignment=2,
+        )
+        value_style = ParagraphStyle(
+            name="ValueBold7",
+            parent=styles["Normal"],
+            fontName="Helvetica-Bold",
+            fontSize=7,
+            leading=6,    
+            textColor=colors.black,
+            alignment=2,
+        )
 
-        # Párrafos con resolución y “son en letras”
-        texto_resolucion        = Paragraph(factura["otros"]["resolucion"], estilo_resolucion)
-        texto_son_valor_letras  = Paragraph(factura["documento"].get("son", ""), estilo_resolucion)
+        # Párrafos
+        texto_resolucion       = Paragraph(factura["otros"]["resolucion"], estilo_resolucion)
+        texto_son_valor_letras = Paragraph(factura["documento"].get("son", ""), estilo_resolucion)
 
-        # Valores numéricos en Paragraphs
-        subt    = f"${float(factura['valores_totales']['valor_base']):,.2f}"
-        desc    = f"${float(factura['valores_totales']['valor_descuento_total']):,.2f}"
-        iva     = f"${float(factura['valores_totales']['valor_total_impuesto_1']):,.2f}"
-        antic   = f"${float(factura['valores_totales']['valor_anticipo']):,.2f}"
-        total   = f"${float(factura['valores_totales']['valor_total_a_pagar']):,.2f}"
+        subt  = f"${float(factura['valores_totales']['valor_base']):,.2f}"
+        desc  = f"${float(factura['valores_totales']['valor_descuento_total']):,.2f}"
+        iva   = f"${float(factura['valores_totales']['valor_total_impuesto_1']):,.2f}"
+        antic = f"${float(factura['valores_totales']['valor_anticipo']):,.2f}"
+        total = f"${float(factura['valores_totales']['valor_total_a_pagar']):,.2f}"
 
         totales_data = [
-            [texto_resolucion,       "Subtotal:",        subt],
-            ["",                     "Descuento:",       desc],
-            [texto_son_valor_letras,                     "IVA:",             iva],
-            ["", "Anticipo:",        antic],
-            ["",                     "Total a Pagar:",   total],
+            [texto_resolucion, "", Paragraph("Subtotal:", label_style), Paragraph(subt,  value_style)],
+            ["",               "", Paragraph("Descuento:", label_style), Paragraph(desc,  value_style)],
+            [texto_son_valor_letras, "", Paragraph("IVA:", label_style), Paragraph(iva,   value_style)],
+            ["",               "", Paragraph("Anticipo:", label_style), Paragraph(antic, value_style)],
+            ["",               "", Paragraph("Total a Pagar:", label_style), Paragraph(total, value_style)],
         ]
 
-        # **Ajuste de anchos de columna**
-        totales_table = Table(totales_data, colWidths=[420, 70, 70])
-
-        totales_table.setStyle(TableStyle([
-            # Borde exterior negro
-            ('BOX',            (0, 0), (-1, -1), 1.5, colors.black),
-            # Líneas internas blancas (invisibles)
-            ('GRID',           (0, 0), (-1, -1), 1,   colors.white),
-            # Alinear etiquetas (col 1) y valores (col 2) a la derecha
-            ('ALIGN',          (1, 0), (-1, -1), 'RIGHT'),
-            # Alinear columna 0 (resolución y son) a la izquierda
-            ('ALIGN',          (0, 0), (0, -1),    'LEFT'),
-            # Alineación vertical arriba en toda la tabla
-            ('VALIGN',         (0, 0), (-1, -1), 'TOP'),
-            # Texto y fondo blanco en todas las celdas
-            ('TEXTCOLOR',      (0, 0), (-1, -1), colors.black),
-            ('BACKGROUND',     (0, 0), (-1, -1), colors.white),
-            # Padding compacto y tamaño de fuente
-            ('BOTTOMPADDING',  (0, 0), (-1, -1), 1),
-            ('TOPPADDING',     (0, 0), (-1, -1), 1),
-            ('FONTSIZE',       (0, 0), (-1, -1), 7),
-        ]))
+        totales_table = Table(totales_data, colWidths=[420, 0, 70, 70])
+        style = TableStyle([
+            ('VALIGN',      (0, 0), (-1, -1), 'MIDDLE'),
+            ('BOX',         (0, 0), (-1, -1),  1, colors.black),
+            ('LINEABOVE',   (0, 0), (-1, 0),    0.5, colors.black),
+            ('LINEBELOW',   (0, -1),(-1, -1),   0.5, colors.black),
+            ('LINEBEFORE',  (0, 0), (0, -1),    0.5, colors.black),
+            ('LINEAFTER',   (-1, 0),(-1, -1),   0.5, colors.black),
+            ('TOPPADDING',  (0, 0), (-1, -1),   0),
+            ('BOTTOMPADDING',(0, 0), (-1, -1),   0),
+        ])
+        totales_table.setStyle(style)
 
         elements.append(totales_table)
         elements.append(Spacer(1, 8))
 
+
     # **Datos Adicionales del Sector Salud**
     def agregar_sector_salud():
-        # **Extraer la colección de información adicional**
-        
+        # Estilos base
         normal_style = styles["Normal"]
-
-        negrita_titulos = ParagraphStyle(
-            name="Negrita7",
+        # Label en normal
+        label_style = ParagraphStyle(
+            name="SectorLabel",
+            parent=normal_style,
+            fontName="Helvetica",
+            fontSize=7,
+            leading=8,
+            textColor=colors.black,
+        )
+        # Valor en negrita
+        value_style = ParagraphStyle(
+            name="SectorValue",
             parent=normal_style,
             fontName="Helvetica-Bold",
-            fontSize=8,
-            textColor=colors.whitesmoke
+            fontSize=7,
+            leading=8,
+            textColor=colors.black,
         )
-        
+
         datos_salud = factura["otros"]
 
-        sector_data = [
-            [Paragraph("<b>Datos Adicionales del Sector Salud</b>", negrita_titulos)],  # **Encabezado**
-            [datos_salud.get("salud_1", ""), "", datos_salud.get("salud_2", ""), ""],  # Cobertura y modalidad de pago
-            [datos_salud.get("salud_3", ""), "", datos_salud.get("salud_7", ""), ""],  # Código prestador y número de contrato
-            [datos_salud.get("salud_4", ""), "", datos_salud.get("salud_5", ""), ""],  # Número de póliza y copago
-            [datos_salud.get("salud_8", ""), "", datos_salud.get("salud_6", ""), ""],  # Cuota moderadora y periodo inicial
-            [datos_salud.get("salud_9", ""), "", datos_salud.get("salud_11", ""), ""],  # Pagos compartidos y periodo facturación
-            ["", "", "", ""]
+        # Datos crudos
+        raw = [
+            [f"<b>Datos Adicionales del Sector Salud</b>", "", "", ""],
+            [datos_salud.get("salud_1", ""), "", datos_salud.get("salud_2", ""), ""],
+            [datos_salud.get("salud_3", ""), "", datos_salud.get("salud_7", ""), ""],
+            [datos_salud.get("salud_4", ""), "", datos_salud.get("salud_5", ""), ""],
+            [datos_salud.get("salud_8", ""), "", datos_salud.get("salud_6", ""), ""],
+            [datos_salud.get("salud_9", ""), "", datos_salud.get("salud_11", ""), ""],
+            ["", "", "", ""],
         ]
 
-        sector_table = Table(sector_data, colWidths=[100, 180, 100, 180])
+        # Convertimos a Paragraph aplicando estilos
+        sector_data = []
+        for row_idx, row in enumerate(raw):
+            new_row = []
+            for col_idx, cell in enumerate(row):
+                text = cell or ""
+                if row_idx == 0:
+                    # Título en negrita blanca
+                    new_row.append(Paragraph(text, ParagraphStyle(
+                        name="TitleSector",
+                        parent=normal_style,
+                        fontName="Helvetica-Bold",
+                        fontSize=8,
+                        textColor=colors.whitesmoke
+                    )))
+                else:
+                    # pares: cols 0 y 2 = label_style, cols 1 y 3 = value_style
+                    style = label_style if col_idx in (0,2) else value_style
+                    new_row.append(Paragraph(text, style))
+            sector_data.append(new_row)
+
+        # Construcción y estilo de la tabla
+        sector_table = Table(sector_data, colWidths=[150, 150, 100, 160])
         sector_table.setStyle(TableStyle([
             ('SPAN', (0, 0), (-1, 0)),  # **Fusionar el título en toda la fila**
             ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
             ('BACKGROUND', (0, 0), (-1, 0), color_rgb),  # **Fondo gris para el título**
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
             ('GRID', (0, 1), (-1, -1), 1, colors.white),  # **Bordes internos blancos**
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),  # **Bordes exteriores negros**
+            ('BOX', (0, 0), (-1, -1), 1, colors.black),  # **Bordes exteriores negros**
             ('FONTSIZE', (0, 0), (-1, -1), 7),  # **Tamaño de letra adecuado**
             ('LEADING', (0, 0), (-1, -1), 8),  # **Espaciado vertical reducido**
             ('BOTTOMPADDING', (0, 0), (-1, -1), 0),  # **Reduce el padding inferior**
@@ -619,7 +699,7 @@ def generar_pdf(factura):
             ('BACKGROUND', (0, 0), (-1, 0), color_rgb),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
             ('GRID', (0, 1), (-1, -1), 1, colors.white),
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('BOX', (0, 0), (-1, -1), 1, colors.black),
             ('FONTSIZE', (0, 0), (-1, -1), 7),
             ('LEADING', (0, 0), (-1, -1), 8),
             ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
@@ -684,7 +764,7 @@ def generar_pdf(factura):
             ('LINEBEFORE', (1, 0), (-1, -1), 1, colors.black),
             ('LINEABOVE', (0, 1), (-1, -1), 1, colors.white),
             ('LINEBELOW', (0, 0), (-1, -1), 1, colors.white),
-            ('BOX', (0, 0), (-1, -1), 1.5, colors.black),
+            ('BOX', (0, 0), (-1, -1), 1, colors.black),
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('FONTSIZE', (0, 0), (-1, -1), 7),

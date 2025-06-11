@@ -11,6 +11,9 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
+class PdfToJsonRequest(BaseModel):
+    pdf_url: HttpUrl
+
 class Emisor(BaseModel):
     documento: str
     razon_social: str
