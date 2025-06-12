@@ -411,8 +411,8 @@ def generar_pdf(factura):
             ("LINEBEFORE",  (0, 0), (0, -1), 0.5, colors.black),
             ("LINEAFTER",   (-1, 0),(-1, -1),0.5, colors.black),
             ("FONTSIZE",    (0, 0), (-1, -1), 7),
-            ("TOPPADDING",  (0, 0), (-1, -1), 0),
-            ("BOTTOMPADDING",(0, 0), (-1, -1), 0),
+            ("TOPPADDING",  (0, 0), (-1, -1), 0.5),
+            ("BOTTOMPADDING",(0, 0), (-1, -1), 0.5),
         ])
 
         # Sección 1: Nombre y Correo en filas independientes
@@ -422,7 +422,7 @@ def generar_pdf(factura):
             [Paragraph("NIT:",           label_style), factura["receptor"]["identificacion"],     Paragraph("Teléfono:", label_style), factura["receptor"]["numero_movil"]],
             [Paragraph("Dirección:",     label_style), factura["receptor"]["direccion"],          Paragraph("Ciudad:",    label_style), factura["receptor"]["ciudad"]],
             [Paragraph("Departamento:",  label_style), factura["receptor"]["departamento"],       Paragraph("País:",      label_style), factura["receptor"]["pais"]],
-        ], colWidths=[100, 180, 100, 180])
+        ], colWidths=[100, 220, 100, 140])
         # convertimos los valores a Paragraph con estilo bold
         for row in seccion_1._cellvalues:
             # celdas índice 1 y 3 (si existen) son valores
@@ -620,7 +620,7 @@ def generar_pdf(factura):
             [datos_salud.get("salud_3", ""), "", datos_salud.get("salud_7", ""), ""],
             [datos_salud.get("salud_4", ""), "", datos_salud.get("salud_5", ""), ""],
             [datos_salud.get("salud_8", ""), "", datos_salud.get("salud_6", ""), ""],
-            [datos_salud.get("salud_9", ""), "", datos_salud.get("salud_11", ""), ""],
+            [datos_salud.get("salud_9", ""), "", datos_salud.get("salud_10", ""), ""],
             ["", "", "", ""],
         ]
 
@@ -646,7 +646,7 @@ def generar_pdf(factura):
             sector_data.append(new_row)
 
         # Construcción y estilo de la tabla
-        sector_table = Table(sector_data, colWidths=[150, 150, 100, 160])
+        sector_table = Table(sector_data, colWidths=[150, 150, 160, 100])
         sector_table.setStyle(TableStyle([
             ('SPAN', (0, 0), (-1, 0)),  # **Fusionar el título en toda la fila**
             ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
@@ -656,8 +656,8 @@ def generar_pdf(factura):
             ('BOX', (0, 0), (-1, -1), 1, colors.black),  # **Bordes exteriores negros**
             ('FONTSIZE', (0, 0), (-1, -1), 7),  # **Tamaño de letra adecuado**
             ('LEADING', (0, 0), (-1, -1), 8),  # **Espaciado vertical reducido**
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),  # **Reduce el padding inferior**
-            ('TOPPADDING', (0, 0), (-1, -1), 0),  # **Reduce el padding superior**
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 0.5),  # **Reduce el padding inferior**
+            ('TOPPADDING', (0, 0), (-1, -1), 0.5),  # **Reduce el padding superior**
         ]))
 
         elements.append(sector_table)
