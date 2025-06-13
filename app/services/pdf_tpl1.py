@@ -418,8 +418,8 @@ def generar_pdf(factura):
         # Sección 1: Nombre y Correo en filas independientes
         seccion_1 = Table([
             [Paragraph("Nombre:",        label_style), factura["receptor"]["nombre"],              "", ""],
-            [Paragraph("Correo Electrónico:", label_style), factura["receptor"]["correo_electronico"], "", ""],
             [Paragraph("NIT:",           label_style), factura["receptor"]["identificacion"],     Paragraph("Teléfono:", label_style), factura["receptor"]["numero_movil"]],
+            [Paragraph("Correo Electrónico:", label_style), factura["receptor"]["correo_electronico"], "", ""],
             [Paragraph("Dirección:",     label_style), factura["receptor"]["direccion"],          Paragraph("Ciudad:",    label_style), factura["receptor"]["ciudad"]],
             [Paragraph("Departamento:",  label_style), factura["receptor"]["departamento"],       Paragraph("País:",      label_style), factura["receptor"]["pais"]],
         ], colWidths=[100, 220, 100, 140])
@@ -429,7 +429,14 @@ def generar_pdf(factura):
             for idx in (1, 3):
                 if isinstance(row[idx], str):
                     row[idx] = Paragraph(row[idx], value_style)
-        seccion_1.setStyle(common_table_style)
+
+        common_cmds = common_table_style._cmds
+        style_s1 = TableStyle(common_cmds + [
+            ('SPAN', (1, 0), (3, 0)),  # extiende la celda de nombre desde la columna 1 hasta la 3
+            ('SPAN', (1, 2), (3, 2)), # extiende la celda de Correo Electrónico desde la columna 1 hasta la 3
+        ])
+
+        seccion_1.setStyle(style_s1)
         elements.append(seccion_1)
 
         # Sección 2: Datos de pago
