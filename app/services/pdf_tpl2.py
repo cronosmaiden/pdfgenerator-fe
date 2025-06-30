@@ -84,6 +84,9 @@ def agregar_pie_pagina(canvas, doc, factura):
 # **Funciones para manejar encabezado y pie de página correctamente**
 def primera_pagina(canvas, doc, factura):
     
+    #----titulo del pdf
+    titulo_pdf = f"{factura['documento']['identificacion']}@afacturar.com"
+    canvas.setTitle(titulo_pdf)
     # ——— Texto arriba-derecha ———
     canvas.saveState()
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
@@ -139,6 +142,7 @@ class NumberedCanvas(canvas_module.Canvas):
         super().__init__(*args, **kwargs)
         self.factura = factura
         self._saved_page_states = []
+        
     def showPage(self):
         self._saved_page_states.append(dict(self.__dict__))
         self._startPage()

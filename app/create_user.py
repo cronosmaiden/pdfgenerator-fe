@@ -28,6 +28,6 @@ def create_user(username: str, password: str):
 
 # Ejecutar el script para crear un usuario manualmente
 if __name__ == "__main__":
-    username = "ralbornoz"  # Cambia esto si deseas otro usuario
+    username = "acanon"  # Cambia esto si deseas otro usuario
     password = "t3l31nt3"
     create_user(username, password)
