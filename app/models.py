@@ -47,7 +47,8 @@ class Documento(BaseModel):
     qr: Optional[str] = ""
     titulo_tipo_documento: str
     son: str
-    notas_pie_pagina: str
+    notas_pie_pagina: Optional[str] = ""
+    notas_adicionales: Optional[str] = ""
     ruta_documento: Optional[AnyUrl] = Field(
         None,
         description="URL del PDF existente; si viene vacía o ausente, se generará automáticamente"

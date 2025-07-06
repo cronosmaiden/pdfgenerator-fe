@@ -1,7 +1,7 @@
 from datetime import datetime
 from urllib.parse import urlparse
 from fastapi import HTTPException
-from reportlab.lib.pagesizes import letter
+from reportlab.lib import pagesizes
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
@@ -41,10 +41,44 @@ def agregar_marca_agua(canvas, factura):
     canvas.setFillGray(0.85, 0.4)  # Gris claro con transparencia
 
     # Coordenadas centrales
-    width, height = letter
+    width, height = canvas._pagesize
     canvas.translate(width / 2, height / 2)
     canvas.rotate(45)
     canvas.drawCentredString(0, 0, texto_marca.upper())
+
+    canvas.restoreState()
+
+# **Función para notas adicionales**
+def agregar_notas_adicionales(canvas, doc, factura):
+    canvas.saveState()
+
+    # Captura el texto
+    notas_texto = factura.get("documento", {}) \
+                       .get("notas_adicionales", 
+                            "notas_adicionales: Información no disponible.")
+
+    #estilo para el paragraph
+    estilo_notas = ParagraphStyle(
+        name="NotasAdicionales",
+        fontName="Helvetica",
+        fontSize=7,
+        leading=7,
+        spaceBefore=0,
+        spaceAfter=0,
+        alignment=1  # 0=left,1=center,2=right
+    )
+
+    #Paragraph que envolverá el texto
+    p = Paragraph(notas_texto, estilo_notas)
+
+    #Calculo el ancho disponible: ancho de la página menos márgenes
+    ancho_disponible = doc.pagesize[0] - (doc.leftMargin + doc.rightMargin)
+    w, h = p.wrap(ancho_disponible, 100)  # 100 es alto máximo provisional
+
+    #Dibujo del paragraph centrado horizontalmente, en y=80
+    x = doc.leftMargin
+    y = 72  # la altura base sobre el pie de página
+    p.drawOn(canvas, x, y)
 
     canvas.restoreState()
     
@@ -59,7 +93,7 @@ def agregar_direccion_contacto(canvas, doc, factura):
         
     )
     canvas.setFont("Helvetica", 7)
-    page_width = letter[0]
+    page_width = doc.pagesize[0]
     
     # 🔽 Ajuste: más abajo
     canvas.drawCentredString(page_width / 2, 65, direccion_texto)
@@ -69,15 +103,37 @@ def agregar_direccion_contacto(canvas, doc, factura):
 # **Función para los Autorretenedores**
 def agregar_autorretenedores(canvas, doc, factura):
     canvas.saveState()
-    notas_texto = factura.get("documento", {}).get(
-        "notas_pie_pagina", "Autorretenedores: Información no disponible."
-    )
-    canvas.setFont("Helvetica", 7)
-    page_width = letter[0]
 
-    # 🔽 Ajuste: justo encima del pie de página
-    canvas.drawCentredString(page_width / 2, 50, notas_texto)
-    
+    # 1) Texto a mostrar
+    notas_texto = factura.get("documento", {}) \
+                       .get("notas_pie_pagina",
+                            "Autorretenedores: Información no disponible.")
+
+    # 2) Estilo con leading reducido (menos espacio entre líneas)
+    estilo_auto = ParagraphStyle(
+        name="Autorretenedores",
+        fontName="Helvetica",
+        fontSize=7,
+        leading=7,       # antes era un simple drawString, ahora más compacto
+        alignment=1,     # 0=left,1=center,2=right
+        spaceBefore=0,
+        spaceAfter=0,
+    )
+
+    # 3) Creamos el Paragraph para que haga wrap
+    p = Paragraph(notas_texto, estilo_auto)
+
+    # 4) Calculamos el ancho disponible según márgenes
+    ancho_disponible = doc.pagesize[0] - (doc.leftMargin + doc.rightMargin)
+
+    # 5) Ajustamos (wrap) y obtenemos la altura que ocupa
+    w, h = p.wrap(ancho_disponible, doc.bottomMargin)
+
+    # 6) Dibujamos el párrafo centrado horizontalmente, a 50pt del fondo
+    x = doc.leftMargin
+    y = 50  # justo encima del pie de página
+    p.drawOn(canvas, x, y)
+
     canvas.restoreState()
 
 # **Función para el pie de página**
@@ -89,7 +145,7 @@ def agregar_pie_pagina(canvas, doc, factura):
     # 📌 Texto del proveedor
     proveedor_texto = factura['afacturar']['info_pt']
     
-    page_width = letter[0]
+    page_width = doc.pagesize[0]
     text_y = 30
 
     canvas.setFont("Helvetica", 6)
@@ -130,7 +186,7 @@ def primera_pagina(canvas, doc, factura):
     # ——— Texto arriba-derecha ———
     canvas.saveState()
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
-    page_width, page_height = letter
+    page_width, page_height = canvas._pagesize
     x = page_width - 28            # tu margen derecho
     y = page_height - 10           # 10pt por debajo del borde superior
     canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
@@ -138,6 +194,7 @@ def primera_pagina(canvas, doc, factura):
     # ————————————————————
 
     agregar_marca_agua(canvas, factura)
+    agregar_notas_adicionales(canvas, doc, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
@@ -156,7 +213,7 @@ def paginas_siguientes(canvas, doc, factura):
     # ——— Texto arriba-derecha ———
     canvas.saveState()
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
-    page_width, page_height = letter
+    page_width, page_height = canvas._pagesize
     x = page_width - 28            # tu margen derecho
     y = page_height - 10           # 10pt por debajo del borde superior
     canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
@@ -164,6 +221,7 @@ def paginas_siguientes(canvas, doc, factura):
     # ————————————————————
     
     agregar_marca_agua(canvas, factura)
+    agregar_notas_adicionales(canvas, doc, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
@@ -197,7 +255,7 @@ class NumberedCanvas(canvas_module.Canvas):
         super(NumberedCanvas, self).save()
 
     def draw_page_number(self, total_pages):
-        page_width = letter[0]
+        page_width = self._pagesize[0]
         text_y = 30
 
         color_hex = self.factura.get("caracteristicas", {}).get("pie_de_pagina", {}).get("Color_texto", "#000000")
@@ -212,10 +270,19 @@ class NumberedCanvas(canvas_module.Canvas):
 
 
 def generar_pdf(factura):
+    
+    papel = factura.get("caracteristicas", {}).get("papel", "letter")
+    try:
+        page_size = getattr(pagesizes, papel.upper())
+    except AttributeError:
+        page_size = pagesizes.LETTER
+
+    page_width, page_height = page_size
+
     buffer = BytesIO()
     pdf = SimpleDocTemplate(
         buffer, 
-        pagesize=letter,
+        pagesize=page_size,
         leftMargin=28,  
         rightMargin=28,  
         topMargin=28,  
@@ -243,7 +310,6 @@ def generar_pdf(factura):
         header_height_first = 180 if solo_primera else 180
         header_height_later  = 120   if solo_primera else 180
 
-    page_height   = letter[1]
     top_margin    = pdf.topMargin
     bottom_margin = pdf.bottomMargin
     footer_height = 80
@@ -850,6 +916,7 @@ def generar_pdf(factura):
     def paginas_basico(canvas, doc):
         agregar_marca_agua(canvas, factura)
         agregar_pie_pagina(canvas, doc, factura)
+        agregar_notas_adicionales(canvas, doc, factura)
         agregar_autorretenedores(canvas, doc, factura)
 
     pdf.build(
