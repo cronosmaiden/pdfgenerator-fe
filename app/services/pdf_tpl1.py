@@ -26,6 +26,44 @@ s3_client = boto3.client(
     region_name=S3_REGION
 )
 
+PAGE_PARAMS = {
+    "LETTER": {
+        "header_height_first": 180,
+        "header_height_later":  90,
+        "footer_height":        80,
+        "Y_NOTAS":              72,
+        "Y_DIRECCION":          65,
+        "Y_AUTORRETE":          50,
+    },
+    "LEGAL": {
+        # valores escalados 1.273 = 1008/792
+        "header_height_first": int(180 * 1.273),   # ≃229
+        "header_height_later":  int(90  * 1.273),   # ≃114
+        "footer_height":        int(80  * 1.273),   # ≃102
+        "Y_NOTAS":              int(72  * 1.273),   # ≃ 92
+        "Y_DIRECCION":          int(65  * 1.273),   # ≃ 83
+        "Y_AUTORRETE":          int(50  * 1.273),   # ≃ 64
+    },
+    "A4": {
+        # escala ≃842/792 = 1.063
+        "header_height_first": int(180 * 1.063),   # ≃191
+        "header_height_later":  int(90  * 1.063),   # ≃ 96
+        "footer_height":        int(80  * 1.063),   # ≃ 85
+        "Y_NOTAS":              int(72  * 1.063),   # ≃ 77
+        "Y_DIRECCION":          int(65  * 1.063),   # ≃ 69
+        "Y_AUTORRETE":          int(50  * 1.063),   # ≃ 53
+    },
+    "HALFLETTER": {  # media carta 396×612pt
+        "header_height_first": int(180 * (612/792)),  # ≃139
+        "header_height_later":  int(90  * (612/792)),  # ≃70
+        "footer_height":        int(80  * (612/792)),  # ≃62
+        "Y_NOTAS":              int(72  * (612/792)),  # ≃56
+        "Y_DIRECCION":          int(65  * (612/792)),  # ≃50
+        "Y_AUTORRETE":          int(50  * (612/792)),  # ≃38
+    },
+    # añade más tamaños dependiendo de los definidos en el json
+}
+
 def hex_to_rgb_color(hex_string: str) -> Color:
     hex_string = hex_string.lstrip("#")
     r, g, b = tuple(int(hex_string[i:i+2], 16) for i in (0, 2, 4))
@@ -48,40 +86,6 @@ def agregar_marca_agua(canvas, factura):
 
     canvas.restoreState()
 
-# **Función para notas adicionales**
-def agregar_notas_adicionales(canvas, doc, factura):
-    canvas.saveState()
-
-    # Captura el texto
-    notas_texto = factura.get("documento", {}) \
-                       .get("notas_adicionales", 
-                            "notas_adicionales: Información no disponible.")
-
-    #estilo para el paragraph
-    estilo_notas = ParagraphStyle(
-        name="NotasAdicionales",
-        fontName="Helvetica",
-        fontSize=7,
-        leading=7,
-        spaceBefore=0,
-        spaceAfter=0,
-        alignment=1  # 0=left,1=center,2=right
-    )
-
-    #Paragraph que envolverá el texto
-    p = Paragraph(notas_texto, estilo_notas)
-
-    #Calculo el ancho disponible: ancho de la página menos márgenes
-    ancho_disponible = doc.pagesize[0] - (doc.leftMargin + doc.rightMargin)
-    w, h = p.wrap(ancho_disponible, 100)  # 100 es alto máximo provisional
-
-    #Dibujo del paragraph centrado horizontalmente, en y=80
-    x = doc.leftMargin
-    y = 72  # la altura base sobre el pie de página
-    p.drawOn(canvas, x, y)
-
-    canvas.restoreState()
-    
 # **Función para la dirección de contacto**
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
@@ -95,9 +99,8 @@ def agregar_direccion_contacto(canvas, doc, factura):
     canvas.setFont("Helvetica", 7)
     page_width = doc.pagesize[0]
     
-    # 🔽 Ajuste: más abajo
-    canvas.drawCentredString(page_width / 2, 65, direccion_texto)
-    
+    y = getattr(doc, "Y_DIRECCION", 65)  # 65 por defecto
+    canvas.drawCentredString(page_width/2, y, direccion_texto)
     canvas.restoreState()
 
 # **Función para los Autorretenedores**
@@ -131,9 +134,8 @@ def agregar_autorretenedores(canvas, doc, factura):
 
     # 6) Dibujamos el párrafo centrado horizontalmente, a 50pt del fondo
     x = doc.leftMargin
-    y = 50  # justo encima del pie de página
-    p.drawOn(canvas, x, y)
-
+    y = getattr(doc, "Y_AUTORRETE", 50)   # 50 por defecto
+    p.drawOn(canvas, doc.leftMargin, y)
     canvas.restoreState()
 
 # **Función para el pie de página**
@@ -194,7 +196,6 @@ def primera_pagina(canvas, doc, factura):
     # ————————————————————
 
     agregar_marca_agua(canvas, factura)
-    agregar_notas_adicionales(canvas, doc, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
@@ -221,7 +222,6 @@ def paginas_siguientes(canvas, doc, factura):
     # ————————————————————
     
     agregar_marca_agua(canvas, factura)
-    agregar_notas_adicionales(canvas, doc, factura)
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
@@ -271,60 +271,83 @@ class NumberedCanvas(canvas_module.Canvas):
 
 def generar_pdf(factura):
     
-    papel = factura.get("caracteristicas", {}).get("papel", "letter")
+    papel = factura.get("caracteristicas", {}).get("papel", "letter").upper()
     try:
-        page_size = getattr(pagesizes, papel.upper())
+        page_size = getattr(pagesizes, papel)
     except AttributeError:
+        papel = "LETTER"
         page_size = pagesizes.LETTER
 
+    # Ancho y alto de la hoja
     page_width, page_height = page_size
 
+    # Obtén los parámetros para este papel (o los de LETTER si no existe)
+    params = PAGE_PARAMS.get(papel, PAGE_PARAMS["LETTER"])
+    header_height_first = params["header_height_first"]
+    header_height_later = params["header_height_later"]
+    footer_height      = params["footer_height"]
+    
+    # Construye el SimpleDocTemplate
     buffer = BytesIO()
     pdf = SimpleDocTemplate(
-        buffer, 
+        buffer,
         pagesize=page_size,
-        leftMargin=28,  
-        rightMargin=28,  
-        topMargin=28,  
-        bottomMargin=28  
+        leftMargin=28,
+        rightMargin=28,
+        topMargin=28,
+        bottomMargin=28,
     )
 
+    pdf.Y_NOTAS     = params["Y_NOTAS"]
+    pdf.Y_DIRECCION = params["Y_DIRECCION"]
+    pdf.Y_AUTORRETE = params["Y_AUTORRETE"]
+
+    # Flags de configuración
     solo_primera = (
-        factura
-        .get("caracteristicas", {})
-        .get("encabezado", {})
-        .get("solo_primera_pagina", 0)
+        factura.get("caracteristicas", {})
+               .get("encabezado", {})
+               .get("solo_primera_pagina", 0)
+        == 1
+    )
+    show_totales_last_only = (
+        factura.get("caracteristicas", {})
+               .get("totales", {})
+               .get("solo_ultima_pagina", 1)
         == 1
     )
 
-    show_totales_last_only = factura.get("caracteristicas", {}) \
-        .get("totales", {}) \
-        .get("solo_ultima_pagina", 1) == 1
-    
+    # Altura del bloque de totales (fija)
     totales_height = 105
 
-    if solo_primera and not show_totales_last_only:
-        header_height_first = 180
-        header_height_later  = 90
-    else:
-        header_height_first = 180 if solo_primera else 180
-        header_height_later  = 120   if solo_primera else 180
-
+    # Márgenes
     top_margin    = pdf.topMargin
     bottom_margin = pdf.bottomMargin
-    footer_height = 80
 
-    base_available_first = page_height - top_margin - bottom_margin - header_height_first - footer_height
-    base_available_later  = page_height - top_margin - bottom_margin - header_height_later  - footer_height
+    # Espacio disponible “crudo” antes de restar totales
+    base_available_first = (
+        page_height
+        - top_margin
+        - bottom_margin
+        - header_height_first
+        - footer_height
+    )
+    base_available_later = (
+        page_height
+        - top_margin
+        - bottom_margin
+        - header_height_later
+        - footer_height
+    )
 
+    # Si sólo mostramos totales en la última, no restamos su altura
     if show_totales_last_only:
-        # si solo en última hoja, usamos el espacio completo en todas
         available_height_first = base_available_first
-        available_height_later  = base_available_later
+        available_height_later = base_available_later
     else:
-        # si en todas las hojas, restamos además el espacio de totales
+        # En todas las páginas restamos además el bloque de totales
         available_height_first = base_available_first - totales_height
-        available_height_later  = base_available_later  - totales_height
+        available_height_later = base_available_later - totales_height
+
 
     styles = getSampleStyleSheet()
     elements = []
@@ -547,7 +570,7 @@ def generar_pdf(factura):
             parent=styles["Normal"],
             fontName="Helvetica",
             fontSize=7,
-            leading=8,
+            leading=6,
             alignment=0  # Alineado a la izquierda
         )
         
@@ -591,8 +614,8 @@ def generar_pdf(factura):
             # **Tamaño de fuente y espaciado**
             ('FONTSIZE', (0, 0), (-1, -1), 7),
             ('FONT',(0,0),(-1,1),'Times-Bold',10,12),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
-            ('TOPPADDING', (0, 0), (-1, -1), 2),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 1),
+            ('TOPPADDING', (0, 0), (-1, -1), 1),
         ]))
         elements.append(detalle_table)
         elements.append(Spacer(1, 8))
@@ -785,6 +808,58 @@ def generar_pdf(factura):
         elements.append(obs_table)
         elements.append(Spacer(1, 8))
 
+    def agregar_notas_adicionales():
+        # **Extraer notas_adicionales**
+        notas_texto = factura["documento"].get("notas_adicionales", "")
+        styles = getSampleStyleSheet()
+        color_fondo = hex_to_rgb_color(factura.get("caracteristicas", {}).get("color_fondo","#808080"))
+
+        negrita_titulos = ParagraphStyle(
+            name="Negrita7",
+            parent=styles["Normal"],
+            fontName="Helvetica-Bold",
+            fontSize=8,
+            textColor=colors.whitesmoke,            
+        )
+        valor_style = ParagraphStyle(
+            name="ValorTextoAdicional",
+            parent=styles["Normal"],
+            fontName="Helvetica",
+            fontSize=7,
+            leading=8,
+        )
+
+        notas_data = [
+            [Paragraph("Notas adicionales", negrita_titulos)],    # Cabecera
+            [Paragraph(notas_texto, valor_style)]                # Valor
+        ]
+
+        notas_table = Table(notas_data, colWidths=[560])
+        notas_table.setStyle(TableStyle([
+            # — Título fila —
+            ('SPAN',           (0, 0), (-1, 0)),
+            ('BACKGROUND',     (0, 0), (-1, 0), color_fondo),
+            ('TEXTCOLOR',      (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN',          (0, 0), (-1, 0), 'CENTER'),
+            ('FONTSIZE',       (0, 0), (-1, 0), 7),     
+            ('LEADING',        (0, 0), (-1, 0), 8),     
+            ('TOPPADDING',     (0, 0), (-1, 0), 0.5),   
+            ('BOTTOMPADDING',  (0, 0), (-1, 0), 0.5),
+
+            # — Cuerpo —
+            ('ALIGN',          (0, 1), (-1, 1), 'CENTER'),
+            ('FONTSIZE',       (0, 1), (-1, 1), 7),
+            ('LEADING',        (0, 1), (-1, 1), 8),
+            ('TOPPADDING',     (0, 1), (-1, 1), 0.5),
+            ('BOTTOMPADDING',  (0, 1), (-1, 1), 0.5),
+
+            # — Bordes generales —
+            ('BOX',            (0, 0), (-1, -1), 1, colors.black),
+        ]))
+
+        elements.append(notas_table)
+        elements.append(Spacer(1, 8))
+
     agregar_encabezado()
     agregar_info_cliente()
     
@@ -857,7 +932,7 @@ def generar_pdf(factura):
     for detalle in factura["detalles"]:
         parrafo = Paragraph(detalle["descripcion"], descripcion_style)
         altura_parrafo = parrafo.wrap(180, 0)[1]
-        altura_fila = max(altura_parrafo, 5) + 4
+        altura_fila = max(altura_parrafo, 10) + 4
 
         # elegimos el espacio disponible según si es página 1 o siguientes
         current_available = (
@@ -880,6 +955,7 @@ def generar_pdf(factura):
                 # primero vaciamos la tabla de detalle
                 agregar_totales()
                 agregar_sector_salud()
+                agregar_notas_adicionales()
             
             buffer_filas = []
             elements.append(PageBreak())
@@ -909,14 +985,15 @@ def generar_pdf(factura):
     if show_totales_last_only or not show_totales_last_only:
         agregar_totales()
         agregar_sector_salud()
+        agregar_notas_adicionales()
     texto_obs = factura.get("otros", {}).get("informacion_adicional", "")
     if texto_obs and texto_obs.strip():
         agregar_obs_documento()
         
+
     def paginas_basico(canvas, doc):
         agregar_marca_agua(canvas, factura)
         agregar_pie_pagina(canvas, doc, factura)
-        agregar_notas_adicionales(canvas, doc, factura)
         agregar_autorretenedores(canvas, doc, factura)
 
     pdf.build(
