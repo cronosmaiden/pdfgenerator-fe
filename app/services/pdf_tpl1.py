@@ -845,15 +845,6 @@ def generar_pdf(factura):
             ('LEADING',        (0, 0), (-1, 0), 8),     
             ('TOPPADDING',     (0, 0), (-1, 0), 0.5),   
             ('BOTTOMPADDING',  (0, 0), (-1, 0), 0.5),
-
-            # — Cuerpo —
-            ('ALIGN',          (0, 1), (-1, 1), 'CENTER'),
-            ('FONTSIZE',       (0, 1), (-1, 1), 7),
-            ('LEADING',        (0, 1), (-1, 1), 8),
-            ('TOPPADDING',     (0, 1), (-1, 1), 0.5),
-            ('BOTTOMPADDING',  (0, 1), (-1, 1), 0.5),
-
-            # — Bordes generales —
             ('BOX',            (0, 0), (-1, -1), 1, colors.black),
         ]))
 
