@@ -811,6 +811,8 @@ def generar_pdf(factura):
     def agregar_notas_adicionales():
         # **Extraer notas_adicionales**
         notas_texto = factura["documento"].get("notas_adicionales", "")
+        if not notas_texto or not notas_texto.strip():
+            return
         styles = getSampleStyleSheet()
         color_fondo = hex_to_rgb_color(factura.get("caracteristicas", {}).get("color_fondo","#808080"))
 
@@ -976,6 +978,7 @@ def generar_pdf(factura):
     if show_totales_last_only or not show_totales_last_only:
         agregar_totales()
         agregar_sector_salud()
+
         agregar_notas_adicionales()
     texto_obs = factura.get("otros", {}).get("informacion_adicional", "")
     if texto_obs and texto_obs.strip():
