@@ -61,6 +61,14 @@ class Documento(BaseModel):
         if isinstance(v, str) and not v.strip():
             return None
         return v
+    
+    @field_validator("notas_adicionales", mode="before")
+    @classmethod
+    def truncate_notas_adicionales(cls, v):
+        # si es cadena, recorta a 800 chars; si es None o no str, lo deja igual
+        if isinstance(v, str):
+            return v[:800]
+        return v
 
 class EncabezadoCaracteristicas(BaseModel):
     solo_primera_pagina: int

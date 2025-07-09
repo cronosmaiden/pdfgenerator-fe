@@ -190,7 +190,7 @@ def primera_pagina(canvas, doc, factura):
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
     page_width, page_height = canvas._pagesize
     x = page_width - 28            # tu margen derecho
-    y = page_height - 10           # 10pt por debajo del borde superior
+    y = page_height - 20           # 10pt por debajo del borde superior
     canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
     canvas.restoreState()
     # ————————————————————
