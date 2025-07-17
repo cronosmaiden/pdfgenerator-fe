@@ -339,14 +339,21 @@ def generar_pdf(factura):
         - footer_height
     )
 
-    # Si sólo mostramos totales en la última, no restamos su altura
+    INFO_CLIENTE_HEIGHT = 180
+    # ---------------------------------------------------
+
     if show_totales_last_only:
+        # Totales SOLO en la última página,
         available_height_first = base_available_first
-        available_height_later = base_available_later
+        available_height_later = base_available_later - totales_height
     else:
-        # En todas las páginas restamos además el bloque de totales
+        # Totales en todas las páginas → restamos siempre
         available_height_first = base_available_first - totales_height
         available_height_later = base_available_later - totales_height
+
+    # ahora, si la sección INFO_CLIENTE **se pinta** en páginas >1, la restamos también
+    if not solo_primera:
+        available_height_later -= INFO_CLIENTE_HEIGHT
 
 
     styles = getSampleStyleSheet()
@@ -933,7 +940,6 @@ def generar_pdf(factura):
             if page_number == 1
             else available_height_later
         )
-
         if altura_actual + altura_fila > current_available:
             # 1) pintamos lo acumulado
             agregar_tabla_detalle(buffer_filas)
