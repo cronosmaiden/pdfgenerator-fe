@@ -1,7 +1,7 @@
 from datetime import datetime
 from urllib.parse import urlparse
 from fastapi import HTTPException
-from reportlab.lib.pagesizes import letter
+from reportlab.lib import pagesizes
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
@@ -27,6 +27,44 @@ s3_client = boto3.client(
     region_name=S3_REGION
 )
 
+PAGE_PARAMS = {
+    "LETTER": {
+        "header_height_first": 180,
+        "header_height_later":  90,
+        "footer_height":        80,
+        "Y_NOTAS":              72,
+        "Y_DIRECCION":          65,
+        "Y_AUTORRETE":          50,
+    },
+    "LEGAL": {
+        # valores escalados 1.273 = 1008/792
+        "header_height_first": int(180 * 1.273),   # ≃229
+        "header_height_later":  int(90  * 1.273),   # ≃114
+        "footer_height":        int(80  * 1.273),   # ≃102
+        "Y_NOTAS":              int(72  * 1.273),   # ≃ 92
+        "Y_DIRECCION":          int(65  * 1.273),   # ≃ 83
+        "Y_AUTORRETE":          int(50  * 1.273),   # ≃ 64
+    },
+    "A4": {
+        # escala ≃842/792 = 1.063
+        "header_height_first": int(180 * 1.063),   # ≃191
+        "header_height_later":  int(90  * 1.063),   # ≃ 96
+        "footer_height":        int(80  * 1.063),   # ≃ 85
+        "Y_NOTAS":              int(72  * 1.063),   # ≃ 77
+        "Y_DIRECCION":          int(65  * 1.063),   # ≃ 69
+        "Y_AUTORRETE":          int(50  * 1.063),   # ≃ 53
+    },
+    "HALFLETTER": {  # media carta 396×612pt
+        "header_height_first": int(180 * (612/792)),  # ≃139
+        "header_height_later":  int(90  * (612/792)),  # ≃70
+        "footer_height":        int(80  * (612/792)),  # ≃62
+        "Y_NOTAS":              int(72  * (612/792)),  # ≃56
+        "Y_DIRECCION":          int(65  * (612/792)),  # ≃50
+        "Y_AUTORRETE":          int(50  * (612/792)),  # ≃38
+    },
+    # añade más tamaños dependiendo de los definidos en el json
+}
+
 # Conversión de color hexadecimal a RGB
 def hex_to_rgb_color(hex_string: str) -> Color:
     hex_string = hex_string.lstrip("#")
@@ -40,8 +78,8 @@ def agregar_marca_agua(canvas, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 50)
     canvas.setFillGray(0.85, 0.4)
-    w, h = letter
-    canvas.translate(w/2, h/2)
+    page_width, page_height = canvas._pagesize
+    canvas.translate(page_width/2, page_height/2)
     canvas.rotate(45)
     canvas.drawCentredString(0, 0, texto.upper())
     canvas.restoreState()
@@ -49,19 +87,24 @@ def agregar_marca_agua(canvas, factura):
 def agregar_direccion_contacto(canvas, doc, factura):
     canvas.saveState()
     texto = (
-        f"Dir.: {factura['receptor']['direccion']} {factura['receptor']['ciudad']}, "
-        f"Tel.: {factura['receptor']['numero_movil']}, "
-        f"Email: {factura['receptor']['correo_electronico']}"
+        f"Dir.: {factura['emisor']['direccion']} {factura['emisor']['ciudad']}, "
+        f"Tel.: {factura['emisor']['num_celular']}, "
+        f"Email: {factura['emisor']['email']} | "
+        f"Web: {factura['emisor']['sitio_web']}"
     )
     canvas.setFont("Helvetica", 7)
-    canvas.drawCentredString(letter[0]/2, 65, texto)
+    page_width, _ = doc.pagesize
+    y = getattr(doc, "Y_DIRECCION", 65)
+    canvas.drawCentredString(page_width/2, y, texto)
     canvas.restoreState()
 
 def agregar_autorretenedores(canvas, doc, factura):
     canvas.saveState()
     notas = factura.get("documento", {}).get("notas_pie_pagina", "Autorretenedores: Información no disponible.")
     canvas.setFont("Helvetica", 7)
-    canvas.drawCentredString(letter[0]/2, 50, notas)
+    page_width, _ = doc.pagesize
+    y = getattr(doc, "Y_AUTORRETE", 50)
+    canvas.drawCentredString(page_width/2, y, notas)
     canvas.restoreState()
 
 def agregar_pie_pagina(canvas, doc, factura):
@@ -71,14 +114,17 @@ def agregar_pie_pagina(canvas, doc, factura):
     texto = factura['afacturar']['info_pt']
     canvas.setFont("Helvetica", 6)
     canvas.setFillColor(color)
-    canvas.drawCentredString(letter[0]/2 - 40, 30, texto)
+    page_width, _ = doc.pagesize
+    canvas.drawCentredString(page_width/2 - 40, 30, texto)
+
     logo_b64 = factura.get("afacturar", {}).get("logo")
     if logo_b64:
         try:
             data = base64.b64decode(logo_b64)
             img = ImageReader(BytesIO(data))
-            canvas.drawImage(img, letter[0]/2+130, 24, width=79, height=20, mask='auto')
-        except: pass
+            canvas.drawImage(img, page_width/2+130, 24, width=79, height=20, mask='auto')
+        except:
+            pass
     canvas.restoreState()
 
 # **Funciones para manejar encabezado y pie de página correctamente**
@@ -90,7 +136,7 @@ def primera_pagina(canvas, doc, factura):
     # ——— Texto arriba-derecha ———
     canvas.saveState()
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
-    page_width, page_height = letter
+    page_width, page_height = doc.pagesize
     x = page_width - 28            # tu margen derecho
     y = page_height - 10           # 10pt por debajo del borde superior
     canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
@@ -106,8 +152,9 @@ def primera_pagina(canvas, doc, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(15, 600)  # Posición: X desde borde izq., Y desde abajo (ajustable)
-    canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
+    _, page_height = doc.pagesize
+    canvas.translate(15, page_height/2)  # centrado vertical aprox.
+    canvas.rotate(90)
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
 
@@ -116,7 +163,7 @@ def paginas_siguientes(canvas, doc, factura):
     # ——— Texto arriba-derecha ———
     canvas.saveState()
     canvas.setFont("Helvetica", 6)  # tamaño pequeño
-    page_width, page_height = letter
+    page_width, page_height = doc.pagesize
     x = page_width - 28            # tu margen derecho
     y = page_height - 10           # 10pt por debajo del borde superior
     canvas.drawRightString(x, y, factura["afacturar"]["titulo_superior"])
@@ -131,8 +178,9 @@ def paginas_siguientes(canvas, doc, factura):
     canvas.saveState()
     canvas.setFont("Helvetica-Bold", 7)
     canvas.setFillColor(colors.grey)
-    canvas.translate(15, 600) # Posición: X desde borde izq., Y desde abajo (ajustable)
-    canvas.rotate(90)  # Rota para que el texto vaya de abajo hacia arriba
+    _, page_height = doc.pagesize
+    canvas.translate(15, page_height/2)
+    canvas.rotate(90)
     canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
     canvas.restoreState()
 
@@ -158,14 +206,38 @@ class NumberedCanvas(canvas_module.Canvas):
         color = hex_to_rgb_color(color_hex)
         self.setFont("Helvetica", 6)
         self.setFillColor(color)
-        self.drawRightString(letter[0]-28, 30, f"Página {self._pageNumber} de {total}")
+        page_width, _ = self._pagesize   # 👈 dinámico
+        self.drawRightString(page_width - 28, 30, f"Página {self._pageNumber} de {total}")
 
 # Generación de PDF con lógica de plantilla 1
 
 def generar_pdf(factura):
     buffer = BytesIO()
-    pdf = SimpleDocTemplate(buffer, pagesize=letter,
-        leftMargin=28, rightMargin=28, topMargin=28, bottomMargin=28)
+    papel = factura.get("caracteristicas", {}).get("papel", "letter").upper()
+    try:
+        page_size = getattr(pagesizes, papel)
+    except AttributeError:
+        papel = "LETTER"
+        page_size = pagesizes.LETTER
+
+    page_width, page_height = page_size
+    params = PAGE_PARAMS.get(papel, PAGE_PARAMS["LETTER"])
+
+    header1  = params["header_height_first"]
+    headerN  = params["header_height_later"]
+    footer_h = params["footer_height"]
+
+    pdf = SimpleDocTemplate(
+        buffer,
+        pagesize=page_size,
+        leftMargin=28,
+        rightMargin=28,
+        topMargin=28,
+        bottomMargin=28,
+    )
+
+    pdf.Y_DIRECCION = params["Y_DIRECCION"]
+    pdf.Y_AUTORRETE = params["Y_AUTORRETE"]
 
     # Configuración márgenes según solo_primera y totales
     solo_primera = factura.get("caracteristicas", {}).get("encabezado", {}).get("solo_primera_pagina", 0)==1
@@ -174,8 +246,8 @@ def generar_pdf(factura):
     header1 = 180
     headerN = 120 if solo_primera else 180
     footer_h = 80
-    avail1 = letter[1]-pdf.topMargin-pdf.bottomMargin-header1-footer_h
-    availN = letter[1]-pdf.topMargin-pdf.bottomMargin-headerN-footer_h
+    avail1 = page_height - pdf.topMargin - pdf.bottomMargin - header1 - footer_h
+    availN = page_height - pdf.topMargin - pdf.bottomMargin - headerN - footer_h
     if not solo_ultima_totales:
         avail1 -= tot_h
         availN -= tot_h
@@ -588,7 +660,7 @@ def generar_pdf(factura):
 
         # **Datos para la tabla**: solo el CUFE
         sector_data = [
-            [Paragraph("CUFE", negrita_titulos)],    # Cabecera
+            [Paragraph("CUFE / CUDE / CUNE", negrita_titulos)],    # Cabecera
             [Paragraph(cufe, valor_style)]           # Valor
         ]
 
