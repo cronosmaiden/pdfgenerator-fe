@@ -1,19 +1,26 @@
-from pydantic import BaseModel, HttpUrl, condecimal, AnyHttpUrl, BaseModel, AnyUrl, Field, field_validator
+from pydantic import BaseModel, HttpUrl, AnyUrl, Field, field_validator
 from sqlalchemy import Column, Integer, String
 from app.database import Base
-from typing import List, Optional, Any
-from datetime import datetime
+from typing import List, Optional
 
+# -------------------------------
 # Modelo para la base de datos
+# -------------------------------
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
+# -------------------------------
+# Requests básicos
+# -------------------------------
 class PdfToJsonRequest(BaseModel):
     pdf_url: HttpUrl
 
+# -------------------------------
+# Emisor
+# -------------------------------
 class Emisor(BaseModel):
     documento: str
     razon_social: str
@@ -31,6 +38,9 @@ class Emisor(BaseModel):
     tarifa_ica: str
     logo: Optional[str] = None
 
+# -------------------------------
+# Documento (común factura / nómina)
+# -------------------------------
 class Documento(BaseModel):
     identificacion: str
     fecha: str
@@ -40,7 +50,7 @@ class Documento(BaseModel):
     condicion_de_pago: Optional[str] = ""
     tipo_de_pago: Optional[str] = ""
     numero_orden: Optional[str] = ""
-    fecha_vencimiento: str
+    fecha_vencimiento: Optional[str] = ""
     marca_agua: Optional[str] = ""
     cufe: str
     fecha_validacion_dian: str
@@ -57,19 +67,20 @@ class Documento(BaseModel):
     @field_validator("ruta_documento", mode="before")
     @classmethod
     def empty_str_to_none(cls, v):
-        # Si recibimos "" (o solo espacios), lo convertimos a None
         if isinstance(v, str) and not v.strip():
             return None
         return v
-    
+
     @field_validator("notas_adicionales", mode="before")
     @classmethod
     def truncate_notas_adicionales(cls, v):
-        # si es cadena, recorta a 800 chars; si es None o no str, lo deja igual
         if isinstance(v, str):
             return v[:800]
         return v
 
+# -------------------------------
+# Características
+# -------------------------------
 class EncabezadoCaracteristicas(BaseModel):
     solo_primera_pagina: int
     Color_texto: str
@@ -89,6 +100,9 @@ class Caracteristicas(BaseModel):
     plantilla: str
     color_fondo: str
 
+# -------------------------------
+# Receptor
+# -------------------------------
 class Receptor(BaseModel):
     ciudad: str
     correo_electronico: str
@@ -99,7 +113,9 @@ class Receptor(BaseModel):
     numero_movil: str
     pais: str
 
-# 📌 Modelo de Detalle de Factura
+# -------------------------------
+# Factura (plantilla 1 y 2)
+# -------------------------------
 class CargoDescuento(BaseModel):
     es_descuento: bool
     porcentaje_cargo_descuento: Optional[str] = "0.00"
@@ -143,7 +159,7 @@ class DetalleFactura(BaseModel):
     numero_linea: int
     cantidad: int
     unidad_medida: Optional[str] = ""
-    unidad_de_cantidad: Optional[str] = ""  # Adaptación flexible
+    unidad_de_cantidad: Optional[str] = ""
     nombre_unidad_medida: Optional[str] = ""
     valor_unitario: str
     descripcion: str
@@ -176,33 +192,89 @@ class ValoresTotales(BaseModel):
     total_documento: str
     valor_total_a_pagar: str
 
+# -------------------------------
+# Nómina (plantilla 3)
+# -------------------------------
+class Devengo(BaseModel):
+    tipo: str
+    valor: str
+    descripcion: str
+
+class Deduccion(BaseModel):
+    tipo: str
+    valor: str
+    descripcion: str
+
+class AportesEmpleador(BaseModel):
+    tipo: str
+    valor: str
+    descripcion: str
+
+class PrestacionesSociales(BaseModel):
+    tipo: str
+    valor: str
+    descripcion: str
+
+class ValorNomina(BaseModel):
+    valor_base: str
+    valor_total_devengos: Optional[str] = "0.00"
+    valor_total_deducciones: Optional[str] = "0.00"
+    valor_total_empleador: Optional[str] = "0.00"
+    valor_total_prestaciones: Optional[str] = "0.00"
+    valor_total_pago: Optional[str] = "0.00"
+
+# -------------------------------
+# Otros (unificado para factura y nómina)
+# -------------------------------
 class Otros(BaseModel):
-    resolucion: str
-    salud_1: str
-    salud_2: str
-    salud_3: str
-    salud_4: str
-    salud_5: str
-    salud_6: str
+    # Factura
+    resolucion: Optional[str] = ""
+    salud_1: Optional[str] = ""
+    salud_2: Optional[str] = ""
+    salud_3: Optional[str] = ""
+    salud_4: Optional[str] = ""
+    salud_5: Optional[str] = ""
+    salud_6: Optional[str] = ""
     salud_7: Optional[str] = ""
-    salud_8: str
-    salud_9: str
-    salud_10: str
-    salud_11: str
+    salud_8: Optional[str] = ""
+    salud_9: Optional[str] = ""
+    salud_10: Optional[str] = ""
+    salud_11: Optional[str] = ""
     documento_referencia: Optional[str] = ""
     informacion_adicional: Optional[str] = ""
 
+    # Nómina
+    variable_1: Optional[str] = ""
+    variable_2: Optional[str] = ""
+    variable_3: Optional[str] = ""
+
+# -------------------------------
+# Afacturar
+# -------------------------------
 class Afacturar(BaseModel):
     titulo_superior: str
     logo: Optional[str] = ""
     info_pt: str
 
+# -------------------------------
+# FacturaRequest (unificado)
+# -------------------------------
 class FacturaRequest(BaseModel):
     emisor: Emisor
     documento: Documento
     caracteristicas: Caracteristicas
     receptor: Receptor
-    detalles: List[DetalleFactura]
-    valores_totales: ValoresTotales
+
+    # Factura
+    detalles: List[DetalleFactura] = Field(default_factory=list)
+    valores_totales: Optional[ValoresTotales] = None
+
+    # Nómina
+    devengos: List[Devengo] = Field(default_factory=list)
+    deducciones: List[Deduccion] = Field(default_factory=list)
+    aportes_empleador: List[AportesEmpleador] = Field(default_factory=list)
+    prestaciones_sociales: List[PrestacionesSociales] = Field(default_factory=list)
+    valor_nomina: Optional[ValorNomina] = None
+
     otros: Otros
     afacturar: Afacturar

@@ -1,5 +1,6 @@
 from .pdf_tpl1 import generar_pdf as generar_pdf_tpl1
 from .pdf_tpl2 import generar_pdf as generar_pdf_tpl2
+from .pdf_tpl3 import generar_pdf as generar_pdf_tpl3
 
 def generar_pdf(factura):
     # 1) Extraemos el valor de plantilla desde caracteristicas.plantilla (por defecto = 1)
@@ -14,6 +15,8 @@ def generar_pdf(factura):
         return generar_pdf_tpl1(factura)
     elif plantilla == 2:
         return generar_pdf_tpl2(factura)
+    elif plantilla == 3:
+        return generar_pdf_tpl3(factura)
     else:
         raise ValueError(f"Plantilla desconocida: {plantilla}. Solo se admite 1 o 2.")
     
