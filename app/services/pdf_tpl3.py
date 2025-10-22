@@ -1,17 +1,14 @@
 from datetime import datetime
 from urllib.parse import urlparse
 from reportlab.lib import pagesizes, colors
-from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
-)
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.colors import Color
 from reportlab.pdfgen import canvas as canvas_module
 from io import BytesIO
 from starlette.concurrency import run_in_threadpool
 from dotenv import load_dotenv
-import boto3
-import os
+import boto3, os
 
 # Cargar variables de entorno
 load_dotenv()
@@ -21,17 +18,16 @@ S3_REGION = os.getenv("S3_REGION")
 # Cliente S3
 s3_client = boto3.client("s3", region_name=S3_REGION)
 
-# ============================
+# ----------------------------
 # Utilidades
-# ============================
+# ----------------------------
 def hex_to_rgb_color(hex_string: str) -> Color:
+    if not hex_string:
+        return colors.HexColor("#044b5b")
     hex_string = hex_string.lstrip("#")
     r, g, b = tuple(int(hex_string[i:i+2], 16) for i in (0, 2, 4))
     return Color(r/255.0, g/255.0, b/255.0)
 
-# ============================
-# Canvas numerado
-# ============================
 class NumberedCanvas(canvas_module.Canvas):
     def __init__(self, *args, factura=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,29 +42,23 @@ class NumberedCanvas(canvas_module.Canvas):
         total = len(self._saved_page_states)
         for state in self._saved_page_states:
             self.__dict__.update(state)
-            self.draw_page_number(total)
+            self._draw_page_number(total)
             super().showPage()
         super().save()
 
-    def draw_page_number(self, total):
+    def _draw_page_number(self, total):
         self.setFont("Helvetica", 6)
         self.setFillColor(colors.black)
         page_width, _ = self._pagesize
         self.drawRightString(page_width - 28, 30, f"Página {self._pageNumber} de {total}")
 
-# ============================
-# Secciones del PDF
-# ============================
-def seccion_datos_liquidacion(factura, elements, color_fondo):
-    # Estilo título centrado
+# ----------------------------
+# Secciones
+# ----------------------------
+def seccion_datos_liquidacion(factura, elements, header_color):
     titulo_style = ParagraphStyle(
-        "titulo",
-        fontSize=9,
-        textColor=colors.whitesmoke,
-        alignment=1,  # centrado
-        fontName="Helvetica-Bold"
+        "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1, fontName="Helvetica-Bold"
     )
-
     data = [
         [Paragraph("<b>Datos de la liquidación</b>", titulo_style)],
         [f"{factura['otros'].get('variable_1','')}"],
@@ -76,20 +66,21 @@ def seccion_datos_liquidacion(factura, elements, color_fondo):
         [f"Usuario liquidador: {factura['documento'].get('usuario_liquidador','')}"],
         [f"Fecha liquidación: {factura['documento'].get('fecha','')}"]
     ]
-
     tbl = Table(data, colWidths=[500])
     tbl.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), color_fondo),  # solo el encabezado con color
+        ("BACKGROUND", (0, 0), (-1, 0), header_color),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("BOX", (0, 0), (-1, -1), 1, colors.black),   # solo borde exterior
-        ("ALIGN", (0, 0), (-1, 0), "CENTER"),         # centrar título
+        ("BOX", (0, 0), (-1, -1), 1, colors.black),
+        # sin grilla interna
+        ("ALIGN", (0, 0), (-1, 0), "CENTER"),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("TOPPADDING", (0, 1), (-1, -1), 2),
+        ("BOTTOMPADDING", (0, 1), (-1, -1), 2),
     ]))
     elements.append(tbl)
     elements.append(Spacer(1, 8))
 
-
-def seccion_trabajador(factura, elements, color_fondo):
+def seccion_trabajador(factura, elements, header_color):
     trabajador = factura["receptor"]
     salario = ""
     for d in factura.get("devengos", []):
@@ -99,55 +90,48 @@ def seccion_trabajador(factura, elements, color_fondo):
     dias = factura["otros"].get("variable_3", "")
 
     titulo_style = ParagraphStyle(
-        "titulo",
-        fontSize=9,
-        textColor=colors.whitesmoke,
-        alignment=1,  # centrado
-        fontName="Helvetica-Bold"
+        "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1, fontName="Helvetica-Bold"
     )
-
     data = [
         [Paragraph("<b>Información del trabajador</b>", titulo_style)],
         [f"{trabajador['identificacion']} - {trabajador['nombre']}"],
         [f"Salario Base: {salario}"],
-        [f"{dias}"]
+        [f"{dias}"],
     ]
-
     tbl = Table(data, colWidths=[500])
     tbl.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), color_fondo),  # encabezado con color
+        ("BACKGROUND", (0, 0), (-1, 0), header_color),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("BOX", (0, 0), (-1, -1), 1, colors.black),   # solo borde externo
-        ("ALIGN", (0, 0), (-1, 0), "CENTER"),         # centrar título
+        ("BOX", (0, 0), (-1, -1), 1, colors.black),
+        # sin grilla interna
+        ("ALIGN", (0, 0), (-1, 0), "CENTER"),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("TOPPADDING", (0, 1), (-1, -1), 2),
+        ("BOTTOMPADDING", (0, 1), (-1, -1), 2),
     ]))
     elements.append(tbl)
     elements.append(Spacer(1, 8))
 
-def tabla_detalle(titulo, items, total, color_fondo):
+def tabla_detalle(titulo, items, total, header_color):
     styles = getSampleStyleSheet()
     header = [Paragraph(f"<b>{titulo}</b>", ParagraphStyle(
         "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1
     ))]
-    # título de sección en fila propia
     data = [header, ["Tipo", "Valor", "Observación"]]
-
     for d in items:
         data.append([
             d.get("tipo", ""),
             f"${float(d.get('valor', 0)):,.0f}",
             d.get("descripcion", "")
         ])
-
     data.append([
         Paragraph(f"<b>Total {titulo}</b>", styles["Normal"]),
         "",
         f"${float(total or 0):,.0f}"
     ])
-
     tbl = Table(data, colWidths=[200, 100, 200])
     tbl.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), color_fondo),
+        ("BACKGROUND", (0, 0), (-1, 0), header_color),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
         ("BACKGROUND", (0, 1), (-1, 1), colors.lightgrey),
         ("BOX", (0, 0), (-1, -1), 1, colors.black),
@@ -155,23 +139,24 @@ def tabla_detalle(titulo, items, total, color_fondo):
     ]))
     return tbl
 
-def seccion_neto(factura, elements, color_fondo):
+def seccion_neto(factura, elements, header_color):
     neto = factura.get("valor_nomina", {}).get("valor_total_pago", "0")
-    data = [[Paragraph(f"<b>Neto a pagar: ${float(neto):,.0f}</b>", ParagraphStyle(
-        "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=0
-    ))]]
+    data = [[Paragraph(
+        f"<b>Neto a pagar: ${float(neto):,.0f}</b>",
+        ParagraphStyle("titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1)
+    )]]
     tbl = Table(data, colWidths=[500])
     tbl.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), color_fondo),
+        ("BACKGROUND", (0, 0), (-1, 0), header_color),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
         ("BOX", (0, 0), (-1, -1), 1, colors.black),
     ]))
     elements.append(tbl)
     elements.append(Spacer(1, 8))
 
-# ============================
+# ----------------------------
 # Generar PDF
-# ============================
+# ----------------------------
 def generar_pdf(factura):
     buffer = BytesIO()
     papel = factura.get("caracteristicas", {}).get("papel", "LETTER").upper()
@@ -181,55 +166,58 @@ def generar_pdf(factura):
         page_size = pagesizes.LETTER
 
     pdf = SimpleDocTemplate(
-        buffer,
-        pagesize=page_size,
-        leftMargin=28,
-        rightMargin=28,
-        topMargin=28,
-        bottomMargin=28,
+        buffer, pagesize=page_size, leftMargin=28, rightMargin=28, topMargin=28, bottomMargin=28
     )
 
-    color_fondo = hex_to_rgb_color(factura.get("caracteristicas", {}).get("color_fondo", "#044b5b"))
+    # Colores base
+    base_color = hex_to_rgb_color(
+        factura.get("caracteristicas", {}).get("color_fondo", "#044b5b")
+    )
+    colores = (factura.get("caracteristicas", {}) or {}).get("color_personalizado_campos", {}) or {}
+
+    color_info      = hex_to_rgb_color(colores.get("color_info")) if colores.get("color_info") else base_color
+    color_negativo  = hex_to_rgb_color(colores.get("color_negativo")) if colores.get("color_negativo") else base_color
+    color_positivo  = hex_to_rgb_color(colores.get("color_positivo")) if colores.get("color_positivo") else base_color
+
     elements = []
 
-    # Secciones
-    seccion_datos_liquidacion(factura, elements, color_fondo)
-    seccion_trabajador(factura, elements, color_fondo)
+    # Secciones con colores por categoría
+    seccion_datos_liquidacion(factura, elements, color_info)       # info
+    seccion_trabajador(factura, elements, color_positivo)          # positivo
 
     elements.append(
         tabla_detalle("Devengos", factura.get("devengos", []),
                       factura.get("valor_nomina", {}).get("valor_total_devengos", "0"),
-                      color_fondo)
+                      color_positivo)
     )
     elements.append(Spacer(1, 8))
 
     elements.append(
         tabla_detalle("Deducciones", factura.get("deducciones", []),
                       factura.get("valor_nomina", {}).get("valor_total_deducciones", "0"),
-                      color_fondo)
+                      color_negativo)
     )
     elements.append(Spacer(1, 8))
 
-    seccion_neto(factura, elements, color_fondo)
+    seccion_neto(factura, elements, color_info)                     # info
 
     elements.append(
         tabla_detalle("Aportes del Empleador", factura.get("aportes_empleador", []),
                       factura.get("valor_nomina", {}).get("valor_total_empleador", "0"),
-                      color_fondo)
+                      color_info)
     )
     elements.append(Spacer(1, 8))
 
     elements.append(
         tabla_detalle("Provisiones Prestaciones Sociales", factura.get("prestaciones_sociales", []),
                       factura.get("valor_nomina", {}).get("valor_total_prestaciones", "0"),
-                      color_fondo)
+                      color_info)
     )
     elements.append(Spacer(1, 8))
 
-    # Construcción PDF
     pdf.build(
         elements,
-        canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs)
+        canvasmaker=lambda *args, **kwargs: NumberedCanvas(*args, factura=factura, **kwargs),
     )
 
     buffer.seek(0)
@@ -250,28 +238,18 @@ def generar_pdf(factura):
             f"{pdf_filename}"
         )
 
-    return {
-        "pdf_bytes": pdf_bytes,
-        "bucket": bucket_name,
-        "key": key,
-        "filename": pdf_filename,
-    }
+    return {"pdf_bytes": pdf_bytes, "bucket": bucket_name, "key": key, "filename": pdf_filename}
 
-# ============================
+# ----------------------------
 # Subida a S3
-# ============================
+# ----------------------------
 def _sync_upload(pdf_bytes: bytes, bucket: str, key: str):
     print(f"[sync_upload] subiendo {len(pdf_bytes)} bytes a s3://{bucket}/{key}")
     try:
         buf = BytesIO(pdf_bytes)
         s3_client.upload_fileobj(
-            buf,
-            bucket,
-            key,
-            ExtraArgs={
-                "ContentType": "application/pdf",
-                "ContentDisposition": "inline",
-            },
+            buf, bucket, key,
+            ExtraArgs={"ContentType": "application/pdf", "ContentDisposition": "inline"},
         )
         print(f"[sync_upload] ¡Subida completada! s3://{bucket}/{key}")
     except Exception as e:

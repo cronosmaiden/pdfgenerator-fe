@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.log
+temp_pdfs/
+temp_qr/
+performance/
+logs/

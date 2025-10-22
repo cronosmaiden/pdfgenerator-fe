@@ -92,6 +92,12 @@ class PieDePagina(BaseModel):
 class Totales(BaseModel):
     solo_ultima_pagina: int
 
+class ColoresPersonalizados(BaseModel):
+    # nuevos colores para plantilla 3
+    color_info: Optional[str] = None
+    color_negativo: Optional[str] = None
+    color_positivo: Optional[str] = None
+
 class Caracteristicas(BaseModel):
     encabezado: EncabezadoCaracteristicas
     totales: Totales
@@ -99,6 +105,8 @@ class Caracteristicas(BaseModel):
     papel: str
     plantilla: str
     color_fondo: str
+    # subsección opcional con colores por sección (solo aplica a plantilla 3)
+    color_personalizado_campos: Optional[ColoresPersonalizados] = None
 
 # -------------------------------
 # Receptor
