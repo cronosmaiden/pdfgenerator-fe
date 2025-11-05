@@ -114,25 +114,40 @@ def seccion_trabajador(factura, elements, header_color):
 
 def tabla_detalle(titulo, items, total, header_color):
     styles = getSampleStyleSheet()
-    header = [Paragraph(f"<b>{titulo}</b>", ParagraphStyle(
-        "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1
-    ))]
-    data = [header, ["Tipo", "Valor", "Observación"]]
+
+    # Fila de título (se expandirá con SPAN a las 3 columnas)
+    data = [
+        [Paragraph(f"<b>{titulo}</b>", ParagraphStyle(
+            "titulo", fontSize=9, textColor=colors.whitesmoke, alignment=1
+        ))],
+        ["Tipo", "Valor", "Observación"]
+    ]
+
     for d in items:
         data.append([
             d.get("tipo", ""),
             f"${float(d.get('valor', 0)):,.0f}",
             d.get("descripcion", "")
         ])
+
     data.append([
         Paragraph(f"<b>Total {titulo}</b>", styles["Normal"]),
         "",
         f"${float(total or 0):,.0f}"
     ])
+
+    # Misma anchura total (=500) para que alinee con las otras secciones
     tbl = Table(data, colWidths=[200, 100, 200])
     tbl.setStyle(TableStyle([
+        # Encabezado: color + SPAN y centrado
         ("BACKGROUND", (0, 0), (-1, 0), header_color),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+        ("SPAN", (0, 0), (-1, 0)),                 # <<— abarca las 3 columnas
+        ("ALIGN", (0, 0), (-1, 0), "CENTER"),
+        ("TOPPADDING", (0, 0), (-1, 0), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, 0), 3),
+
+        # Fila de cabeceras de columnas
         ("BACKGROUND", (0, 1), (-1, 1), colors.lightgrey),
         ("BOX", (0, 0), (-1, -1), 1, colors.black),
         ("GRID", (0, 1), (-1, -1), 0.5, colors.grey),
