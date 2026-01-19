@@ -49,6 +49,9 @@ class Documento(BaseModel):
     metodo_de_pago: str
     condicion_de_pago: Optional[str] = ""
     tipo_de_pago: Optional[str] = ""
+    banco: Optional[str] = ""
+    cuenta_bancaria: Optional[str] = ""
+    cune: Optional[str] = ""
     numero_orden: Optional[str] = ""
     fecha_vencimiento: Optional[str] = ""
     marca_agua: Optional[str] = ""
@@ -120,6 +123,8 @@ class Receptor(BaseModel):
     nombre: str
     numero_movil: str
     pais: str
+    cargo: Optional[str] = ""
+    tipo_contrato: Optional[str] = ""
 
 # -------------------------------
 # Factura (plantilla 1 y 2)
