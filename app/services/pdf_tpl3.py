@@ -186,6 +186,16 @@ def primera_pagina(canvas, doc, factura):
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
 
+    # Fecha de validación DIAN en lateral izquierdo
+    canvas.saveState()
+    canvas.setFont("Helvetica-Bold", 7)
+    canvas.setFillColor(colors.grey)
+    _, page_height = doc.pagesize
+    canvas.translate(15, page_height/2)  # centrado vertical aprox.
+    canvas.rotate(90)
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
+    canvas.restoreState()
+
 def paginas_siguientes(canvas, doc, factura):
 
     # Texto superior derecha: "Representación gráfica del documento electrónico"
@@ -202,6 +212,16 @@ def paginas_siguientes(canvas, doc, factura):
     agregar_direccion_contacto(canvas, doc, factura)
     agregar_autorretenedores(canvas, doc, factura)
     agregar_pie_pagina(canvas, doc, factura)
+
+    # Fecha de validación DIAN en lateral izquierdo
+    canvas.saveState()
+    canvas.setFont("Helvetica-Bold", 7)
+    canvas.setFillColor(colors.grey)
+    _, page_height = doc.pagesize
+    canvas.translate(15, page_height/2)  # centrado vertical aprox.
+    canvas.rotate(90)
+    canvas.drawString(0, 0, f"Fecha de validación DIAN: {factura['documento']['fecha_validacion_dian']}")
+    canvas.restoreState()
 
 class NumberedCanvas(canvas_module.Canvas):
     def __init__(self, *args, factura=None, **kwargs):
@@ -279,13 +299,24 @@ def agregar_encabezado(factura, elements, ancho_disponible):
         alignment=0
     )
 
-    info_fija = [
-        Paragraph(f"<b>NIT:</b> {emisor.get('documento', 'N/A')}", label_style),
-        Paragraph(f"<b>Actividad Económica:</b> {emisor.get('actividad_economica', 'N/A')}", label_style),
-        Paragraph(f"<b>Régimen:</b> {emisor.get('regimen', 'N/A')}", label_style),
-        Paragraph(f"<b>Responsable IVA:</b> {emisor.get('responsable_iva', 'N/A')}", label_style),
-        Paragraph(f"<b>Tarifa ICA:</b> {emisor.get('tarifa_ica', 'N/A')}", label_style)
-    ]
+    # Construir info_fija solo con campos que tengan datos
+    info_fija = []
+
+    # NIT siempre se muestra
+    info_fija.append(Paragraph(f"<b>NIT:</b> {emisor.get('documento', 'N/A')}", label_style))
+
+    # Solo agregar los siguientes campos si tienen valor
+    if emisor.get('actividad_economica'):
+        info_fija.append(Paragraph(f"<b>Actividad Económica:</b> {emisor.get('actividad_economica')}", label_style))
+
+    if emisor.get('regimen'):
+        info_fija.append(Paragraph(f"<b>Régimen:</b> {emisor.get('regimen')}", label_style))
+
+    if emisor.get('responsable_iva'):
+        info_fija.append(Paragraph(f"<b>Responsable IVA:</b> {emisor.get('responsable_iva')}", label_style))
+
+    if emisor.get('tarifa_ica'):
+        info_fija.append(Paragraph(f"<b>Tarifa ICA:</b> {emisor.get('tarifa_ica')}", label_style))
 
     # Logo del emisor (grande, izquierda)
     logo_ofe_b64 = factura.get("emisor", {}).get("logo")
@@ -396,10 +427,10 @@ def agregar_info_trabajador(factura, elements, ancho_disponible):
         alignment=1
     )
 
-    # Título negro
+    # Título gris oscuro
     titulo = Table([[Paragraph("Información del trabajador", titulo_style)]], colWidths=[ancho_disponible])
     titulo.setStyle(TableStyle([
-        ("BACKGROUND",   (0, 0), (-1, -1), colors.black),
+        ("BACKGROUND",   (0, 0), (-1, -1), colors.HexColor("#333333")),
         ("TEXTCOLOR",    (0, 0), (-1, -1), colors.whitesmoke),
         ("ALIGN",        (0, 0), (-1, -1), "CENTER"),
         ("BOX",          (0, 0), (-1, -1), 1, colors.black),
@@ -495,10 +526,10 @@ def agregar_periodo_pago(factura, elements, ancho_disponible):
         alignment=0
     )
 
-    # Título negro
+    # Título gris oscuro
     titulo = Table([[Paragraph("Periodo de pago", titulo_style)]], colWidths=[ancho_disponible])
     titulo.setStyle(TableStyle([
-        ("BACKGROUND",   (0, 0), (-1, -1), colors.black),
+        ("BACKGROUND",   (0, 0), (-1, -1), colors.HexColor("#333333")),
         ("TEXTCOLOR",    (0, 0), (-1, -1), colors.whitesmoke),
         ("ALIGN",        (0, 0), (-1, -1), "CENTER"),
         ("BOX",          (0, 0), (-1, -1), 1, colors.black),

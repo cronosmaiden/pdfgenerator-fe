@@ -32,10 +32,10 @@ class Emisor(BaseModel):
     num_celular: Optional[str] = ""
     email: str
     sitio_web: Optional[str] = ""
-    regimen: str
-    responsable_iva: str
-    actividad_economica: str
-    tarifa_ica: str
+    regimen: Optional[str] = ""
+    responsable_iva: Optional[str] = ""
+    actividad_economica: Optional[str] = ""
+    tarifa_ica: Optional[str] = ""
     logo: Optional[str] = None
 
 # -------------------------------
@@ -55,7 +55,7 @@ class Documento(BaseModel):
     numero_orden: Optional[str] = ""
     fecha_vencimiento: Optional[str] = ""
     marca_agua: Optional[str] = ""
-    cufe: str
+    cufe: Optional[str] = ""
     fecha_validacion_dian: str
     qr: Optional[str] = ""
     titulo_tipo_documento: str
