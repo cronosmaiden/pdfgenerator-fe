@@ -320,7 +320,7 @@ def agregar_encabezado(factura, elements, ancho_disponible):
 
     # Logo del emisor (grande, izquierda)
     logo_ofe_b64 = factura.get("emisor", {}).get("logo")
-    logo_ofe_img = None
+    logo_ofe_img = Spacer(1, 1)  # Spacer por defecto si no hay logo
     if logo_ofe_b64:
         try:
             # Soportar tanto base64 como URL
@@ -331,10 +331,16 @@ def agregar_encabezado(factura, elements, ancho_disponible):
                 logo_ofe_img = Image(logo_buffer, width=120, height=80)
             else:
                 logo_data = base64.b64decode(logo_ofe_b64)
-                logo_buffer = BytesIO(logo_data)
-                logo_ofe_img = Image(logo_buffer, width=120, height=80)
+                # Validar que sea una imagen válida, no un PDF u otro formato
+                if logo_data.startswith(b'%PDF'):
+                    print(f"⚠️ Error: El logo del emisor es un PDF, no una imagen válida")
+                    logo_ofe_img = Spacer(1, 1)
+                else:
+                    logo_buffer = BytesIO(logo_data)
+                    logo_ofe_img = Image(logo_buffer, width=120, height=80)
         except Exception as e:
             print(f"⚠️ Error al cargar logo_ofe: {e}")
+            logo_ofe_img = Spacer(1, 1)
 
     # QR Code (centro)
     qr_code = generar_qr(factura['documento']['qr'])
@@ -378,7 +384,7 @@ def agregar_encabezado(factura, elements, ancho_disponible):
     col_info = ancho_disponible - col_logo - col_qr - col_doc
 
     header_row = Table([
-        [[logo_ofe_img] if logo_ofe_img else [""], info_fija, qr_image, factura_info]
+        [[logo_ofe_img], info_fija, qr_image, factura_info]
     ], colWidths=[col_logo, col_info, col_qr, col_doc])
 
     header_row.setStyle(TableStyle([
